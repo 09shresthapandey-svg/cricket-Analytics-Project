@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cricket Analytics Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        nav { background: #0b3d2e; padding: 12px; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; cursor: pointer; }
+        nav a:hover { text-decoration: underline; }
+        section { padding: 80px 40px; display: none; }
+        section.active { display: block; }
+        h1, h2, h3 { color: #0b3d2e; }
+        img { max-width: 600px; display: block; margin: 15px 0; }
+        ul { margin-left: 20px; }
+        figure { margin: 20px 0; }
+        figcaption { font-size: 0.9em; color: #444; }
+        footer { background: #f4f4f4; text-align: center; padding: 15px; }
+    </style>
+</head>
+<body>
+<script>
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => sec.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+}
+</script>
+
+<nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('introduction')">Introduction</a>
+    <a onclick="showSection('dataprep')">DataPrep_EDA</a>
+    <a onclick="showSection('models')">Models</a>
+    <a onclick="showSection('results')">Results</a>
+    <a onclick="showSection('conclusion')">Conclusion</a>
+    <a onclick="showSection('about')">About Me</a>
+</nav>
+
+<section id="home" class="active" style="padding:0;">
+    <div style="height:100vh; background-image:url('https://images.unsplash.com/photo-1595210382266-2d0077c1f541'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center;">
+        <h1 style="background:rgba(0,0,0,0.65); color:white; padding:25px 50px; border-radius:10px;">Cricket Analytics Project</h1>
+    </div>
+</section>
+
+<section id="introduction">
+    <h2>Introduction</h2>
+
+    <p>Cricket is one of the most widely followed sports in the world, with billions of viewers across countries such as India, England, Australia, Pakistan, and South Africa. The game is played in multiple formats including Test cricket, One Day Internationals (ODIs), and Twenty20 (T20), each demanding different skills, strategies, and performance expectations from players. Performance in cricket is influenced by a complex interaction of factors such as player roles, match format, pitch conditions, weather, opposition strength, and venue characteristics. Batting, bowling, and all-round performance are measured using a variety of statistics including runs scored, strike rate, economy rate, wickets taken, and match impact. Understanding how these variables interact is important for teams, analysts, coaches, and selectors aiming to improve performance and decision-making.</p>
+
+    <p>In recent years, the availability of large-scale cricket data has transformed how the sport is analyzed and understood. Advanced analytics are now used to evaluate player consistency, predict match outcomes, identify emerging talent, and optimize team composition. Organizations such as ESPN Cricinfo and Cricsheet provide ball-by-ball and match-level data that enables deeper exploration of performance patterns across formats and competitions. Prior research and analysis in cricket have examined batting order optimization, home advantage, pitch effects, and player aging curves. However, there is still significant opportunity to explore how multiple variables jointly influence performance using modern data science and machine learning techniques. This project focuses on exploring cricket data to uncover meaningful patterns, relationships, and insights that explain player and team success.</p>
+
+    <figure>
+        <img src="images/cricketttt.jpg" alt="Cricket Match">
+        <figcaption>International cricket match highlighting batting and bowling dynamics.</figcaption>
+    </figure>
+
+    <h3>Research Questions</h3>
+    <ul>
+        <li>How does player performance vary across different cricket formats (Test, ODI, T20)?</li>
+        <li>What statistical factors most strongly influence match outcomes?</li>
+        <li>Do home teams have a measurable advantage in international cricket?</li>
+        <li>How do pitch and venue conditions affect batting and bowling performance?</li>
+        <li>Are all-rounders more valuable than specialist players in limited-overs formats?</li>
+        <li>How consistent are top players across seasons and opponents?</li>
+        <li>Can early match indicators predict final match results?</li>
+        <li>How does strike rate impact batting success in T20 cricket?</li>
+        <li>Are certain teams more successful due to balanced player roles?</li>
+        <li>Can players be clustered into performance-based groups using statistics?</li>
+    </ul>
+</section>
+
+<section id="dataprep">
+    <h2>Data Preparation and Exploratory Data Analysis (EDA)</h2>
+
+    <h3>Data Sources</h3>
+    <p>
+        Data for this project was collected from multiple sources to capture player-level, match-level, and contextual cricket information.
+        The primary source is the <strong>Cricsheet dataset</strong>, which provides ball-by-ball data for international and league cricket matches through a publicly available API.
+        This allows us to analyze player performance, match progression, and situational factors.
+        Additional datasets were downloaded from publicly available cricket statistics repositories to supplement player summaries and match metadata.
+    </p>
+
+    <h3>API Used </h3>
+    <p>
+        <strong>API:</strong> Cricsheet<br>
+        <strong>Website:</strong> <a href="https://cricsheet.org" target="_blank">https://cricsheet.org</a><br>
+    </p>
+
+    <h3>Raw and Cleaned Data</h3>
+    <p>
+        Raw data contained missing values, inconsistent naming, and unnecessary columns.
+        We cleaned the data using Python to remove missing values, standardize column names, drop irrelevant columns, and ensure numeric values were correct.
+        Cleaned data ensures reliable statistical analysis and visualization.
+    </p>
+    <figure>
+        <img src="images/Screenshot 2026-01-28 at 4.10.00 PM.png" alt="Raw Data Sample">
+        <figcaption>Sample of the raw cricket dataset before cleaning.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/Screenshot 2026-01-28 at 4.24.23 PM.png" alt="Cleaned Data Sample">
+        <figcaption>Sample of the cleaned cricket dataset ready for analysis.</figcaption>
+    </figure>
+
+    <h3>Exploratory Data Analysis and Visualizations</h3>
+    <p>
+        We generated the following visualizations to explore the data. Each figure includes a title, labeled axes, and an explanatory caption.
+    </p>
+    <figure>
+        <img src="images/runs_distribution.png" alt="Runs Distribution">
+        <figcaption>Distribution of runs scored per ball.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/wickets_per_match.png" alt="Wickets per Match">
+        <figcaption>Number of wickets taken per match.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/top_batsmen.png" alt="Top Batsmen">
+        <figcaption>Top 10 batsmen by total runs scored.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/top_bowlers.png" alt="Top Bowlers">
+        <figcaption>Top 10 bowlers by wickets taken.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/team_runs.png" alt="Team Runs">
+        <figcaption>Total runs scored by each team.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/balls_vs_runs.png" alt="Balls vs Runs">
+        <figcaption>Balls faced vs total runs scored per player.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/extras_distribution.png" alt="Extras Distribution">
+        <figcaption>Distribution of extras per ball.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/runs_per_innings.png" alt="Runs per Innings">
+        <figcaption>Total runs per innings across matches.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/correlation_heatmap.png" alt="Correlation Heatmap">
+        <figcaption>Correlation heatmap showing relationships between numeric features.</figcaption>
+    </figure>
+    <figure>
+        <img src="images/wickets_per_match.png" alt="Wicket Types">
+        <figcaption>Distribution of different wicket types.</figcaption>
+    </figure>
+
+    <p>
+        <strong>Code and Data Links:</strong><br>
+        Python code for cleaning and visualizations: <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project.git" target="_blank">GitHub Repository</a><br>
+        
+    </p>
+</section>
+
+<section id="models">
+    <h2>Models</h2>
+    <p>This section will include machine learning models such as clustering, PCA, decision trees, SVMs, and Bayesian approaches in later modules.</p>
+</section>
+
+<section id="results">
+    <h2>Results</h2>
+    <p>This section will summarize analytical and model-based findings in later modules.</p>
+</section>
+
+<section id="conclusion">
+    <h2>Conclusion</h2>
+    <p>This section will synthesize findings and discuss implications for cricket analytics.</p>
+</section>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>My name is Shrestha Pandey, and I am currently pursuing my Master’s at the University of Colorado Boulder. I am passionate about Machine Learning and Data Science, and I hold a technical degree in Computer Science with a specialization in Artificial Intelligence and Machine Learning. I enjoy working with data to uncover insights, build predictive models, and apply machine learning techniques to solve real-world problems, including in areas like sports analytics.</p>
+</section>
+
+<footer>
+    <p>Cricket Analytics Project | Module 1 Project Part 1</p>
+</footer>
+
+</body>
+</html>
