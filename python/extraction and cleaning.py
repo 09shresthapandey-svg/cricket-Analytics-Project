@@ -4,13 +4,11 @@ import os
 import requests
 import zipfile
 
-# ----------------------------
-# 1️⃣ Download Cricsheet T20 CSV zip
-# ----------------------------
+
 url = "https://cricsheet.org/downloads/t20s_csv2.zip"
 zip_path = "t20s_csv2.zip"
 
-# Create raw data folder
+
 os.makedirs("data/raw", exist_ok=True)
 
 print("Downloading T20 matches dataset from Cricsheet...")
@@ -18,23 +16,18 @@ r = requests.get(url)
 with open(zip_path, 'wb') as f:
     f.write(r.content)
 
-# Extract zip
+
 with zipfile.ZipFile(zip_path, 'r') as zip_ref:
     zip_ref.extractall("data/raw/")
 
 print("Data extracted to 'data/raw/' folder.")
 
-# ----------------------------
-# 2️⃣ Collect all ball-by-ball CSVs (ignore *_info.csv)
-# ----------------------------
 all_files = glob.glob("data/raw/*.csv")
 ball_files = [f for f in all_files if "_info" not in f]
 
 print(f"Found {len(ball_files)} ball-by-ball CSV files.")
 
-# ----------------------------
-# 3️⃣ Load first 30 valid matches safely
-# ----------------------------
+
 all_matches = []
 
 for f in ball_files:
@@ -55,9 +48,7 @@ for f in ball_files:
 if len(all_matches) == 0:
     raise Exception("No valid CSV files found for the first 30 matches!")
 
-# ----------------------------
-# 4️⃣ Combine and clean
-# ----------------------------
+
 combined_df = pd.concat(all_matches, ignore_index=True)
 
 # Standardize column names
@@ -74,9 +65,7 @@ combined_df = combined_df.dropna(subset=['runs_off_bat', 'ball'])
 # Keep only valid runs
 combined_df = combined_df[combined_df['runs_off_bat'] >= 0]
 
-# ----------------------------
-# 5️⃣ Save combined cleaned CSV
-# ----------------------------
+
 os.makedirs("data/cleaned", exist_ok=True)
 combined_path = "data/cleaned/combined_30_matches.csv"
 combined_df.to_csv(combined_path, index=False)
