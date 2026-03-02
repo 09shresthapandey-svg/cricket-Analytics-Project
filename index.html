@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Cricket Analytics Project</title>
 
 <style>
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-nav { background: #0b3d2e; padding: 12px; position: fixed; top: 0; width: 100%; z-index: 1000; }
-nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; cursor: pointer; }
-nav a:hover { text-decoration: underline; }
-section { padding: 80px 40px; display: none; }
-section.active { display: block; }
-h1, h2, h3 { color: #0b3d2e; }
-img { max-width: 800px; width: 100%; display: block; margin: 15px 0; border-radius: 8px; }
-figure { margin: 25px 0; }
-figcaption { font-size: 0.9em; color: #444; }
-footer { background: #f4f4f4; text-align: center; padding: 15px; }
-.note { background:#f7fff8; border-left:5px solid #0b3d2e; padding:12px; margin:18px 0; border-radius:6px; }
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+  nav { background: #0b3d2e; padding: 12px; position: fixed; top: 0; width: 100%; z-index: 1000; }
+  nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; cursor: pointer; }
+  nav a:hover { text-decoration: underline; }
+  section { padding: 80px 40px; display: none; }
+  section.active { display: block; }
+  h1, h2, h3 { color: #0b3d2e; }
+  img { max-width: 800px; width: 100%; display: block; margin: 15px 0; border-radius: 8px; }
+  ul { margin-left: 20px; }
+  figure { margin: 22px 0; }
+  figcaption { font-size: 0.92em; color: #444; }
+  footer { background: #f4f4f4; text-align: center; padding: 15px; }
+  code { background: #f2f2f2; padding: 2px 6px; border-radius: 4px; }
+  .note { background:#f7fff8; border-left:5px solid #0b3d2e; padding:12px; margin:18px 0; border-radius:6px; }
+  .small { font-size: 0.95em; color:#333; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .card { background: #fff; border: 1px solid #e6e6e6; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  a { color: #0b3d2e; }
 </style>
 </head>
 
 <body>
-
 <script>
 function showSection(sectionId) {
   const sections = document.querySelectorAll("section");
@@ -33,177 +38,368 @@ function showSection(sectionId) {
 </script>
 
 <nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('introduction')">Introduction</a>
-<a onclick="showSection('dataprep')">DataPrep_EDA</a>
-<a onclick="showSection('pca')">PCA</a>
-<a onclick="showSection('clustering')">Clustering</a>
-<a onclick="showSection('arm')">ARM</a>
-<a onclick="showSection('conclusion')">Conclusion</a>
-<a onclick="showSection('about')">About Me</a>
+  <a onclick="showSection('home')">Home</a>
+  <a onclick="showSection('introduction')">Introduction</a>
+  <a onclick="showSection('dataprep')">DataPrep_EDA</a>
+  <a onclick="showSection('pca')">PCA</a>
+  <a onclick="showSection('clustering')">Clustering</a>
+  <a onclick="showSection('arm')">ARM</a>
+  <a onclick="showSection('models')">Models</a>
+  <a onclick="showSection('results')">Results</a>
+  <a onclick="showSection('conclusion')">Conclusion</a>
+  <a onclick="showSection('about')">About Me</a>
 </nav>
 
 <!-- HOME -->
 <section id="home" class="active" style="padding:0;">
-<div style="height:100vh; background-image:url('https://images.unsplash.com/photo-1595210382266-2d0077c1f541'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center;">
-<h1 style="background:rgba(0,0,0,0.65); color:white; padding:25px 50px; border-radius:10px;">
-Cricket Analytics Project
-</h1>
-</div>
+  <div style="height:100vh; background-image:url('https://images.unsplash.com/photo-1595210382266-2d0077c1f541'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center;">
+    <h1 style="background:rgba(0,0,0,0.65); color:white; padding:25px 50px; border-radius:10px; text-align:center;">
+      Cricket Analytics Project
+    </h1>
+  </div>
 </section>
 
 <!-- INTRODUCTION -->
 <section id="introduction">
-<h2>Introduction</h2>
-<p>
-This project analyzes T20 cricket ball-by-ball data using data cleaning, EDA,
-Principal Component Analysis (PCA), Clustering, and Association Rule Mining (ARM).
-</p>
+  <h2>Introduction</h2>
 
-<figure>
-<img src="imagesss/cricketttt.jpg">
-<figcaption>Cricket context image.</figcaption>
-</figure>
+  <p>
+    Cricket is one of the most widely followed sports in the world, with billions of viewers across countries such as India, England,
+    Australia, Pakistan, and South Africa. The game is played in multiple formats including Test cricket, One Day Internationals (ODIs),
+    and Twenty20 (T20), each demanding different skills, strategies, and performance expectations from players. Batting, bowling, and
+    all-round performance are measured using statistics such as runs scored, strike rate, economy rate, wickets taken, and match impact.
+  </p>
 
-<figure>
-<img src="imagesss/team_runs.png">
-<figcaption>Total runs by team (EDA).</figcaption>
-</figure>
+  <p>
+    In recent years, the availability of large-scale cricket data has transformed how the sport is analyzed. Ball-by-ball datasets allow
+    analysts to study scoring patterns, wicket events, and team/player performance. This project uses Cricsheet T20 ball-by-ball data and
+    applies a full data science lifecycle: data collection, cleaning, EDA, dimensionality reduction (PCA), clustering, and association rule mining.
+  </p>
+
+  <p>
+    The goal is to uncover patterns that explain performance and match dynamics. In Module 2, PCA helps visualize and reduce complexity,
+    clustering groups similar player batting profiles, and ARM (Apriori) finds “if-then” relationships between events within overs.
+  </p>
+
+  <figure>
+    <img src="imagesss/cricketttt.jpg" alt="Cricket Match">
+    <figcaption>Cricket match image used as project context.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/team_runs.png" alt="Team Runs Preview">
+    <figcaption>Preview insight: total runs by team (from EDA).</figcaption>
+  </figure>
+
+  <h3>Research Questions</h3>
+  <ul>
+    <li>How do scoring patterns vary across overs and innings in T20 matches?</li>
+    <li>Which teams and players contribute the most runs and wickets in the sample?</li>
+    <li>Can we reduce numeric match features to 2D/3D while retaining most information?</li>
+    <li>Can we cluster players into different batting profile groups?</li>
+    <li>What events frequently occur together within an over (ARM rules)?</li>
+  </ul>
 </section>
 
-<!-- DATA PREP -->
+<!-- DATAPREP + EDA -->
 <section id="dataprep">
-<h2>Data Preparation & EDA</h2>
+  <h2>Data Preparation and Exploratory Data Analysis (EDA)</h2>
 
-<div class="note">
-Cleaning Steps:
-<ul>
-<li>Standardized column names</li>
-<li>Removed _info files</li>
-<li>Combined 30 matches</li>
-<li>Dropped missing values</li>
-<li>Saved combined_30_matches.csv</li>
-</ul>
-</div>
+  <h3>Data Source</h3>
+  <p>
+    The dataset comes from <strong>Cricsheet</strong>, which provides ball-by-ball cricket match data. I downloaded the T20 dataset zip
+    (<code>t20s_csv2.zip</code>), extracted CSV files, removed <code>_info</code> files, and combined the first 30 valid matches into one dataset.
+  </p>
 
-<h3>Raw vs Cleaned</h3>
-<figure><img src="imagesss/raw.png"><figcaption>Raw Data</figcaption></figure>
-<figure><img src="imagesss/cleaned.png"><figcaption>Cleaned Data</figcaption></figure>
+  <h3>Website / Source</h3>
+  <p>
+    <strong>Source:</strong> Cricsheet<br>
+    <strong>Website:</strong> <a href="https://cricsheet.org" target="_blank">https://cricsheet.org</a>
+  </p>
 
-<h3>EDA Visualizations</h3>
-<figure><img src="imagesss/runs_distribution.png"><figcaption>Runs Distribution</figcaption></figure>
-<figure><img src="imagesss/wickets_per_match.png"><figcaption>Wickets per Match</figcaption></figure>
-<figure><img src="imagesss/top_batsmen.png"><figcaption>Top Batsmen</figcaption></figure>
-<figure><img src="imagesss/top_bowlers.png"><figcaption>Top Bowlers</figcaption></figure>
-<figure><img src="imagesss/balls_vs_runs.png"><figcaption>Balls vs Runs</figcaption></figure>
-<figure><img src="imagesss/extras_distribution.png"><figcaption>Extras Distribution</figcaption></figure>
-<figure><img src="imagesss/runs_per_innings.png"><figcaption>Runs per Innings</figcaption></figure>
-<figure><img src="imagesss/correlation_heatmap.png"><figcaption>Correlation Heatmap</figcaption></figure>
-<figure><img src="imagesss/wicket_types.png"><figcaption>Wicket Types</figcaption></figure>
+  <div class="note">
+    <strong>Cleaning steps (based on my Python code):</strong>
+    <ul>
+      <li>Standardized column names to lowercase with underscores.</li>
+      <li>Kept columns: <code>match_id, innings, ball, batting_team, bowling_team, striker, non_striker, bowler, runs_off_bat, extras, wicket_type</code>.</li>
+      <li>Dropped rows with missing <code>runs_off_bat</code> or <code>ball</code>.</li>
+      <li>Kept only valid non-negative <code>runs_off_bat</code>.</li>
+      <li>Saved cleaned file: <code>data/cleaned/combined_30_matches.csv</code>.</li>
+    </ul>
+  </div>
 
-<h3>Code and Data Links</h3>
-<p>
-  <strong>GitHub Repository:</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
-    Cricket Analytics Project
-  </a>
-</p>
+  <h3>Raw vs Cleaned (Screenshots)</h3>
+  <figure>
+    <img src="imagesss/raw.png" alt="Raw Data">
+    <figcaption>Raw dataset sample (before cleaning).</figcaption>
+  </figure>
+  <figure>
+    <img src="imagesss/cleaned.png" alt="Cleaned Data">
+    <figcaption>Cleaned dataset sample (after cleaning).</figcaption>
+  </figure>
 
-<p>
-  <strong>Extraction & Cleaning Code:</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/extraction%20and%20cleaning.py" target="_blank">
-    extraction and cleaning.py
-  </a>
-</p>
+  <h3>EDA Visualizations</h3>
 
-<p>
-  <strong>EDA Code:</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/EDA.py" target="_blank">
-    EDA.py
-  </a>
-</p>
-  
+  <figure>
+    <img src="imagesss/runs_distribution.png" alt="Runs Distribution">
+    <figcaption>Distribution of runs scored per ball (<code>runs_off_bat</code>).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/wickets_per_match.png" alt="Wickets per Match">
+    <figcaption>Wickets per match (count of non-null <code>wicket_type</code> by match).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/top_batsmen.png" alt="Top Batsmen">
+    <figcaption>Top 10 batsmen by total runs scored.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/top_bowlers.png" alt="Top Bowlers">
+    <figcaption>Top 10 bowlers by wickets taken.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/team_runs.png" alt="Team Runs">
+    <figcaption>Total runs scored by each batting team.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/balls_vs_runs.png" alt="Balls vs Runs">
+    <figcaption>Balls faced vs total runs scored per player (aggregated by striker).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/extras_distribution.png" alt="Extras Distribution">
+    <figcaption>Distribution of extras per ball.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/runs_per_innings.png" alt="Runs per Innings">
+    <figcaption>Total runs per innings across the combined dataset.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/correlation_heatmap.png" alt="Correlation Heatmap">
+    <figcaption>Correlation heatmap of numeric features.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/wicket_types.png" alt="Wicket Types">
+    <figcaption>Distribution of wicket types.</figcaption>
+  </figure>
+
+  <!-- ✅ FIXED LINKS (VISIBLE + CORRECT) -->
+  <h3>Code and Data Links</h3>
+
+  <p>
+    <strong>GitHub Repository:</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
+      Cricket Analytics Project
+    </a>
+  </p>
+
+  <p>
+    <strong>Extraction & Cleaning Code:</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/extraction%20and%20cleaning.py" target="_blank">
+      extraction and cleaning.py
+    </a>
+  </p>
+
+  <p>
+    <strong>EDA Code:</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/EDA.py" target="_blank">
+      EDA.py
+    </a>
+  </p>
 </section>
 
 <!-- PCA -->
 <section id="pca">
-<h2>PCA</h2>
+  <h2>PCA (Principal Component Analysis)</h2>
 
-<figure><img src="imagesss/pca_2d.png"><figcaption>PCA 2D</figcaption></figure>
-<figure><img src="imagesss/pca_3d.png"><figcaption>PCA 3D</figcaption></figure>
-<figure><img src="imagesss/pca_cumulative_variance.png"><figcaption>Cumulative Variance</figcaption></figure>
+  <h3>What is PCA?</h3>
+  <p>
+    Principal Component Analysis (PCA) is a dimensionality reduction method that transforms correlated numeric variables into a smaller set
+    of uncorrelated variables called principal components. The first principal component captures the most variance (information), followed by
+    subsequent components that capture remaining variance while staying orthogonal. PCA is useful for visualization and reducing complexity while
+    retaining most of the information in the data.
+  </p>
 
-<p>
-  <strong>Code Link (PCA):</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/pca_cricket.py" target="_blank">
-    pca_cricket.py
-  </a>
-</p>
+  <div class="note">
+    <strong>Requirement satisfied:</strong> PCA is applied only on numeric columns. Label columns (team names, players, wicket_type) were excluded.
+    I used <code>StandardScaler</code> before applying PCA.
+  </div>
 
+  <h3>Numeric Features Used</h3>
+  <p>
+    From the cleaned dataset, PCA used the numeric columns:
+    <code>innings</code>, <code>ball</code>, <code>runs_off_bat</code>, and <code>extras</code>.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>PCA 2D (n_components=2)</h3>
+      <img src="imagesss/pca_2d.png" alt="PCA 2D">
+      <p class="small">2D projection using PC1 and PC2.</p>
+    </div>
+
+    <div class="card">
+      <h3>PCA 3D (n_components=3)</h3>
+      <img src="imagesss/pca_3d.png" alt="PCA 3D">
+      <p class="small">3D projection using PC1, PC2, and PC3.</p>
+    </div>
+  </div>
+
+  <figure>
+    <img src="imagesss/pca_cumulative_variance.png" alt="Cumulative PCA Variance">
+    <figcaption>Cumulative explained variance used to find how many components retain at least 95% variance.</figcaption>
+  </figure>
+
+  <!-- ✅ FIXED PCA LINK (VISIBLE) -->
+  <p>
+    <strong>Code Link (PCA):</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/pca_cricket.py" target="_blank">
+      pca_cricket.py
+    </a>
+  </p>
 </section>
 
 <!-- CLUSTERING -->
 <section id="clustering">
-<h2>Clustering</h2>
+  <h2>Clustering</h2>
 
-<figure>
-<img src="imagesss/silhouettete_scores.png">
-<figcaption>Silhouette Scores</figcaption>
-</figure>
+  <h3>Compare & Contrast: KMeans vs Hierarchical vs DBSCAN</h3>
+  <p>
+    <strong>KMeans</strong> partitions data into <em>k</em> clusters using centroids and minimizes within-cluster variance.
+    <strong>Hierarchical clustering</strong> builds nested clusters and visualizes structure through a dendrogram.
+    <strong>DBSCAN</strong> is density-based and can label outliers as noise while discovering non-spherical clusters.
+  </p>
 
-<figure><img src="imagesss/kmeans_k1.png"><figcaption>KMeans k1</figcaption></figure>
-<figure><img src="imagesss/kmeans_k2.png"><figcaption>KMeans k2</figcaption></figure>
-<figure><img src="imagesss/kmeans_k3.png"><figcaption>KMeans k3</figcaption></figure>
-<figure><img src="imagesss/hierarchical_dendrogram.png"><figcaption>Hierarchical</figcaption></figure>
-<figure><img src="imagesss/dbscan_clusters.png"><figcaption>DBSCAN</figcaption></figure>
-<p>
-  <strong>Code Link (Clustering):</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/clustering_cricket.py" target="_blank">
-    clustering_cricket.py
-  </a>
-</p>
+  <div class="note">
+    <strong>Data Prep:</strong> Ball-by-ball data was aggregated by <code>striker</code> to create numeric player profiles.
+    Labels (player names) were saved separately and removed before clustering. Numeric features were standardized with <code>StandardScaler</code>.
+  </div>
 
+  <h3>Silhouette Method (Choosing k)</h3>
+  <figure>
+    <img src="imagesss/silhouettete_scores.png" alt="Silhouette Scores">
+    <figcaption>Silhouette scores used to pick three smart k values for KMeans.</figcaption>
+  </figure>
+
+  <h3>KMeans Results (3 k values)</h3>
+  <figure>
+    <img src="imagesss/kmeans_k1.png" alt="KMeans k1">
+    <figcaption>KMeans clustering result for selected k value #1 (centroids included).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/kmeans_k2.png" alt="KMeans k2">
+    <figcaption>KMeans clustering result for selected k value #2 (centroids included).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/kmeans_k3.png" alt="KMeans k3">
+    <figcaption>KMeans clustering result for selected k value #3 (centroids included).</figcaption>
+  </figure>
+
+  <h3>Hierarchical Clustering</h3>
+  <figure>
+    <img src="imagesss/hierarchical_dendrogram.png" alt="Hierarchical Dendrogram">
+    <figcaption>Dendrogram showing hierarchical grouping of player profiles.</figcaption>
+  </figure>
+
+  <h3>DBSCAN</h3>
+  <figure>
+    <img src="imagesss/dbscan_clusters.png" alt="DBSCAN Clusters">
+    <figcaption>DBSCAN clustering results (noise points labeled as -1).</figcaption>
+  </figure>
+
+  <!-- ✅ FIXED CLUSTERING LINK (VISIBLE) -->
+  <p>
+    <strong>Code Link (Clustering):</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/clustering_cricket.py" target="_blank">
+      clustering_cricket.py
+    </a>
+  </p>
 </section>
 
 <!-- ARM -->
 <section id="arm">
-<h2>Association Rule Mining</h2>
+  <h2>ARM (Association Rule Mining)</h2>
 
-<figure>
-<img src="imagesss/arm_network.png">
-<figcaption>ARM Network</figcaption>
-</figure>
+  <h3>Overview</h3>
+  <p>
+    Association Rule Mining (ARM) discovers “if-then” patterns in transaction data using metrics:
+    <strong>support</strong> (how often a rule occurs),
+    <strong>confidence</strong> (how likely the consequent is given the antecedent),
+    and <strong>lift</strong> (strength relative to chance).
+    The <strong>Apriori</strong> algorithm finds frequent itemsets above a support threshold and generates rules from them.
+  </p>
 
-<p>
-  <strong>Code Link (ARM):</strong>
-  <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/arm_cricket.py" target="_blank">
-    arm_cricket.py
-  </a>
-</p>
+  <div class="note">
+    <strong>Transaction format used:</strong> Each <strong>over</strong> was treated as one transaction
+    (grouped by <code>match_id</code>, <code>innings</code>, and over number derived from <code>ball</code>).
+    Items included: <code>WICKET</code>, <code>BOUNDARY</code>, <code>EXTRAS</code>, <code>HIGH_RUN_OVER</code>, <code>DOT_HEAVY</code>.
+  </div>
 
+  <h3>Network Visualization</h3>
+  <figure>
+    <img src="imagesss/arm_network.png" alt="ARM Network Graph">
+    <figcaption>Network visualization of top association rules (edges show strong relationships).</figcaption>
+  </figure>
+
+  <!-- ✅ FIXED ARM LINK (VISIBLE) -->
+  <p>
+    <strong>Code Link (ARM):</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/arm_cricket.py" target="_blank">
+      arm_cricket.py
+    </a>
+  </p>
+</section>
+
+<!-- MODELS -->
+<section id="models">
+  <h2>Models</h2>
+  <p>
+    This section will include additional models (e.g., classification, prediction) in later modules if required.
+    Current module focuses on PCA, clustering, and ARM as required by the assignment.
+  </p>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <h2>Results</h2>
+  <p>
+    EDA shows scoring distributions, wicket patterns, and top-performing players/teams.
+    PCA reduces numeric features into 2D/3D for visualization while keeping most variance.
+    Clustering groups players into batting profiles, and ARM finds event associations within overs.
+  </p>
 </section>
 
 <!-- CONCLUSION -->
 <section id="conclusion">
-<h2>Conclusion</h2>
-<p>
-This project demonstrates a complete data science pipeline on cricket data,
-including cleaning, EDA, PCA, clustering, and ARM.
-</p>
+  <h2>Conclusion</h2>
+  <p>
+    This project demonstrates an end-to-end data science pipeline using Cricsheet T20 ball-by-ball data. After cleaning and EDA,
+    PCA was used for dimensionality reduction and visualization, clustering algorithms were used to group similar player profiles,
+    and ARM was used to discover common event relationships within overs. These methods provide interpretable insights into match dynamics
+    and player performance patterns.
+  </p>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-<h2>About Me</h2>
-<p>
-Shrestha Pandey — Master's student at University of Colorado Boulder.
-Interested in Machine Learning and Data Science.
-</p>
+  <h2>About Me</h2>
+  <p>
+    My name is Shrestha Pandey, and I am currently pursuing my Master’s at the University of Colorado Boulder.
+    I am passionate about Machine Learning and Data Science, and I enjoy applying analytics to real-world domains like sports.
+  </p>
 </section>
 
 <footer>
-<p>Cricket Analytics Project | Module 1 + Module 2</p>
+  <p>Cricket Analytics Project | Module 1 + Module 2</p>
 </footer>
-
 </body>
 </html>
