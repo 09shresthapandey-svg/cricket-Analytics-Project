@@ -47,11 +47,11 @@ function showSection(sectionId) {
 
 <!-- HOME -->
 <section id="home" class="active" style="padding:0;">
-<div style="height:100vh; background-image:url('https://images.unsplash.com/photo-1595210382266-2d0077c1f541'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center;">
-<h1 style="background:rgba(0,0,0,0.65); color:white; padding:25px 50px; border-radius:10px;">
-Cricket Analytics Project
-</h1>
-</div>
+  <div style="height:100vh; background-image:url('https://images.unsplash.com/photo-1595210382266-2d0077c1f541'); background-size:cover; background-position:center; display:flex; align-items:center; justify-content:center;">
+    <h1 style="background:rgba(0,0,0,0.65); color:white; padding:25px 50px; border-radius:10px;">
+      Cricket Analytics Project
+    </h1>
+  </div>
 </section>
 
 <!-- INTRODUCTION -->
@@ -64,24 +64,14 @@ It includes data cleaning, exploratory data analysis (EDA), Principal Component 
 clustering (KMeans, Hierarchical, DBSCAN), and Association Rule Mining (ARM).
 </p>
 
-<p>
-Cricket performance can be studied using ball-by-ball data, which captures scoring events, extras, and wicket outcomes at a granular level.
-Using this dataset, we can explore scoring patterns, team/player contributions, and match dynamics using modern data analysis methods.
-</p>
-
-<p>
-In Module 2, PCA helps reduce dimensionality and visualize numeric structure, clustering groups similar player profiles,
-and ARM discovers if-then relationships between over-level events (e.g., wickets, boundaries, high-run overs).
-</p>
-
 <figure>
-<img src="imagesss/cricketttt.jpg" alt="Cricket">
-<figcaption>Cricket match context.</figcaption>
+  <img src="imagesss/cricketttt.jpg" alt="Cricket">
+  <figcaption>Cricket match context.</figcaption>
 </figure>
 
 <figure>
-<img src="imagesss/team_runs.png" alt="Team Runs">
-<figcaption>Total runs by team (EDA insight).</figcaption>
+  <img src="imagesss/team_runs.png" alt="Team Runs">
+  <figcaption>Total runs by team (EDA insight).</figcaption>
 </figure>
 </section>
 
@@ -95,19 +85,18 @@ Dataset Source:
 </p>
 
 <div class="note">
-<strong>Cleaning Steps (based on my Python code):</strong>
+Cleaning Steps:
 <ul>
-<li>Downloaded and extracted Cricsheet T20 CSV zip.</li>
-<li>Removed <code>_info</code> files and combined the first 30 valid match CSVs.</li>
-<li>Standardized column names to lowercase with underscores.</li>
-<li>Kept key columns: <code>match_id, innings, ball, batting_team, bowling_team, striker, non_striker, bowler, runs_off_bat, extras, wicket_type</code>.</li>
-<li>Dropped missing values in <code>runs_off_bat</code> and <code>ball</code>, kept only non-negative runs.</li>
-<li>Saved: <code>data/cleaned/combined_30_matches.csv</code>.</li>
+<li>Standardized column names</li>
+<li>Removed _info files</li>
+<li>Kept key columns (match_id, innings, ball, runs_off_bat, extras, etc.)</li>
+<li>Dropped missing values</li>
+<li>Saved combined_30_matches.csv</li>
 </ul>
 </div>
 
-<figure><img src="imagesss/raw.png" alt="Raw Data"><figcaption>Raw Data Sample</figcaption></figure>
-<figure><img src="imagesss/cleaned.png" alt="Cleaned Data"><figcaption>Cleaned Data Sample</figcaption></figure>
+<figure><img src="imagesss/raw.png" alt="Raw Data"><figcaption>Raw Data</figcaption></figure>
+<figure><img src="imagesss/cleaned.png" alt="Cleaned Data"><figcaption>Cleaned Data</figcaption></figure>
 
 <h3>EDA Visualizations</h3>
 
@@ -122,27 +111,19 @@ Dataset Source:
 <figure><img src="imagesss/correlation_heatmap.png" alt="Correlation Heatmap"><figcaption>Correlation Heatmap</figcaption></figure>
 <figure><img src="imagesss/wicket_types.png" alt="Wicket Types"><figcaption>Wicket Types</figcaption></figure>
 
-<p><strong>Links:</strong></p>
+<h3>Code and Data Links</h3>
 <ul>
   <li>
     GitHub Repository:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">View Project on GitHub</a>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">Cricket Analytics Project</a>
   </li>
   <li>
     Extraction + Cleaning Code:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/extraction%20and%20cleaning.py" target="_blank">
-      extraction and cleaning.py
-    </a>
+    <a href="python/extraction and cleaning.py" target="_blank">extraction and cleaning.py</a>
   </li>
   <li>
     EDA Code:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/EDA.py" target="_blank">EDA.py</a>
-  </li>
-  <li>
-    Cleaned Dataset:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/data/cleaned/combined_30_matches.csv" target="_blank">
-      combined_30_matches.csv
-    </a>
+    <a href="python/EDA.py" target="_blank">EDA.py</a>
   </li>
 </ul>
 </section>
@@ -151,73 +132,28 @@ Dataset Source:
 <section id="pca">
 <h2>PCA (Principal Component Analysis)</h2>
 
-<h3>PCA Description (1 paragraph)</h3>
 <p>
-Principal Component Analysis (PCA) is a dimensionality reduction technique that transforms correlated numeric variables into a smaller set of
-uncorrelated variables called principal components. Each component is a weighted linear combination of the original features, and the components
-are ordered so that the first captures the most variance (information), followed by the second, third, and so on. PCA is useful for visualization
-(2D/3D plots), identifying which variables contribute most to variation, and simplifying the dataset while retaining most information.
+PCA reduces numeric features (<code>innings, ball, runs_off_bat, extras</code>) into fewer components while preserving variance.
+StandardScaler was used before PCA.
 </p>
 
-<h3>Dataset Choice + Links</h3>
-<p>
-For PCA, I used my cleaned Cricsheet dataset (<code>combined_30_matches.csv</code>). I removed non-numeric/label columns (team names, player names,
-and <code>wicket_type</code>) and used only quantitative columns for PCA.
-</p>
+<figure><img src="imagesss/pca_2d.png" alt="PCA 2D"><figcaption>PCA 2D</figcaption></figure>
+<figure><img src="imagesss/pca_3d.png" alt="PCA 3D"><figcaption>PCA 3D</figcaption></figure>
+<figure><img src="imagesss/pca_cumulative_variance.png" alt="Cumulative Variance"><figcaption>Cumulative Variance</figcaption></figure>
 
+<div class="note">
+<strong>PCA Results (from my output):</strong>
 <ul>
-  <li>
-    Link to raw source:
-    <a href="https://cricsheet.org/downloads/t20s_csv2.zip" target="_blank">Cricsheet T20 zip</a>
-  </li>
-  <li>
-    Link to cleaned dataset:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/data/cleaned/combined_30_matches.csv" target="_blank">
-      combined_30_matches.csv
-    </a>
-  </li>
+  <li>Variance retained (2D): <strong>55.66%</strong></li>
+  <li>Variance retained (3D): <strong>78.97%</strong></li>
+  <li>Components needed for ≥ 95% variance: <strong>4</strong></li>
+  <li>Top 3 eigenvalues: <strong>[1.16483209, 1.06184567, 0.93269786]</strong></li>
 </ul>
-
-<h3>Data Prep for PCA (Quantitative Only)</h3>
-<p>
-The numeric-only PCA input used these columns: <code>innings</code>, <code>ball</code>, <code>runs_off_bat</code>, and <code>extras</code>.
-All labels and qualitative columns were excluded (I did NOT convert qualitative categories into numbers). I normalized the data using
-<code>StandardScaler</code> before applying PCA.
-</p>
-
-<h3>PCA Visualizations</h3>
-<figure><img src="imagesss/pca_2d.png" alt="PCA 2D"><figcaption>PCA 2D (n_components=2)</figcaption></figure>
-<figure><img src="imagesss/pca_3d.png" alt="PCA 3D"><figcaption>PCA 3D (n_components=3)</figcaption></figure>
-
-<h3>Information Retained (Explained Variance)</h3>
-<p>
-After PCA, the first two principal components retain <strong>55.66%</strong> of the total variance in the data.
-This means reducing from 4 dimensions to 2 dimensions preserves slightly more than half of the original information.
-</p>
+</div>
 
 <p>
-When using three components, the total variance retained increases to <strong>78.97%</strong>, meaning the 3D representation
-captures substantially more information while still reducing complexity.
-</p>
-
-<h3>Components Required for ≥ 95% Variance</h3>
-<p>
-Based on the cumulative explained variance plot, I need <strong>4 components</strong> to retain at least 95% of the variance in this dataset.
-This indicates that all four numeric variables contribute meaningful information.
-</p>
-<figure><img src="imagesss/pca_cumulative_variance.png" alt="Cumulative Variance"><figcaption>Cumulative explained variance (≥95% reached at 4 components)</figcaption></figure>
-
-<h3>Top 3 Eigenvalues</h3>
-<ul>
-  <li>PC1: 1.16483209</li>
-  <li>PC2: 1.06184567</li>
-  <li>PC3: 0.93269786</li>
-</ul>
-<p>A screenshot of the Python output showing these values is included in the PCA results images.</p>
-
-<p>
-<strong>PCA Code:</strong>
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/pca_cricket.py" target="_blank">pca_cricket.py</a>
+PCA Code:
+<a href="python/pca_cricket.py" target="_blank">pca_cricket.py</a>
 </p>
 </section>
 
@@ -225,63 +161,30 @@ This indicates that all four numeric variables contribute meaningful information
 <section id="clustering">
 <h2>Clustering</h2>
 
-<h3>Compare and Contrast: KMeans vs Hierarchical vs DBSCAN</h3>
 <p>
-<strong>KMeans</strong> is a partition-based method that assigns points to <em>k</em> clusters by minimizing within-cluster variance (distance to centroids).
-It is fast and works well when clusters are roughly spherical, but requires choosing <em>k</em> in advance and is sensitive to scaling and outliers.
-<strong>Hierarchical clustering</strong> builds a tree (dendrogram) that shows nested cluster structure and does not require choosing <em>k</em> at the start;
-however, it can be slower on large datasets and merges/splits are not reversible.
-<strong>DBSCAN</strong> is density-based: it groups points in dense regions and labels sparse points as noise. DBSCAN can find non-spherical clusters and
-naturally detect outliers, but requires good choices of <code>eps</code> and <code>min_samples</code>.
+KMeans, Hierarchical, and DBSCAN were applied to aggregated player statistics.
+Silhouette method was used to choose optimal k values.
 </p>
 
 <div class="note">
-<strong>Data Prep (required):</strong> I created a labeled dataset where each row corresponds to a player (<code>striker</code>) and the remaining columns are quantitative player-profile features. I saved the label column separately, removed it before clustering, ensured the remaining data was numeric-only, and normalized using <code>StandardScaler</code>.
+<strong>Top 3 k values (from my silhouette results):</strong> <strong>[2, 3, 7]</strong>
 </div>
-
-<h3>Choosing k using the Silhouette Method</h3>
-<p>
-I computed silhouette scores across multiple k values. Higher silhouette scores indicate better-separated clusters.
-Based on these results, the top three k values were:
-<strong>k = 2, k = 3, and k = 7</strong>.
-</p>
 
 <figure>
   <img src="imagesss/silhouette_scores.png" alt="Silhouette Scores">
-  <figcaption>Silhouette scores used to select k = 2, 3, 7</figcaption>
+  <figcaption>Silhouette Scores (used to select k = 2, 3, 7)</figcaption>
 </figure>
 
-<h3>KMeans Results (k = 2, 3, 7)</h3>
-<p>
-Each plot below includes cluster centroids (the mean position of each cluster).
-</p>
+<figure><img src="imagesss/kmeans_k1.png" alt="KMeans k1"><figcaption>KMeans Result (k = 2)</figcaption></figure>
+<figure><img src="imagesss/kmeans_k2.png" alt="KMeans k2"><figcaption>KMeans Result (k = 3)</figcaption></figure>
+<figure><img src="imagesss/kmeans_k3.png" alt="KMeans k3"><figcaption>KMeans Result (k = 7)</figcaption></figure>
 
-<figure><img src="imagesss/kmeans_k1.png" alt="KMeans k=2"><figcaption>KMeans result for k = 2 (centroids included)</figcaption></figure>
-<figure><img src="imagesss/kmeans_k2.png" alt="KMeans k=3"><figcaption>KMeans result for k = 3 (centroids included)</figcaption></figure>
-<figure><img src="imagesss/kmeans_k3.png" alt="KMeans k=7"><figcaption>KMeans result for k = 7 (centroids included)</figcaption></figure>
-
-<h3>Hierarchical Clustering</h3>
-<figure><img src="imagesss/hierarchical_dendrogram.png" alt="Hierarchical Dendrogram"><figcaption>Dendrogram showing hierarchical clustering structure</figcaption></figure>
-<p>
-Compared to KMeans, hierarchical clustering provides a nested view of group structure. Cutting the dendrogram at an appropriate height produces clusters that can be compared to the KMeans groupings.
-</p>
-
-<h3>DBSCAN</h3>
-<figure><img src="imagesss/dbscan_clusters.png" alt="DBSCAN Clusters"><figcaption>DBSCAN clustering results (noise labeled as -1)</figcaption></figure>
-<p>
-DBSCAN identifies dense player groups and labels outliers as noise. Compared to KMeans, DBSCAN does not force every player into a cluster and can highlight unusual profiles.
-</p>
-
-<h3>Overall Interpretation (required discussion)</h3>
-<p>
-KMeans with k = 2 and k = 3 produced broad, interpretable player groupings, while k = 7 created more granular sub-groups. Hierarchical clustering supported similar grouping patterns and clarified how clusters relate. DBSCAN additionally identified possible outliers (noise points) that KMeans would otherwise force into a cluster. Among the tested values, k = 3 provides a strong balance between interpretability and separation based on silhouette results.
-</p>
+<figure><img src="imagesss/hierarchical_dendrogram.png" alt="Hierarchical Dendrogram"><figcaption>Hierarchical Dendrogram</figcaption></figure>
+<figure><img src="imagesss/dbscan_clusters.png" alt="DBSCAN Clusters"><figcaption>DBSCAN Clusters</figcaption></figure>
 
 <p>
-<strong>Clustering Code:</strong>
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/clustering_cricket.py" target="_blank">
-clustering_cricket.py
-</a>
+Clustering Code:
+<a href="python/clustering_cricket.py" target="_blank">clustering_cricket.py</a>
 </p>
 </section>
 
@@ -289,57 +192,43 @@ clustering_cricket.py
 <section id="arm">
 <h2>Association Rule Mining (ARM)</h2>
 
-<h3>(a) Overview</h3>
+<h3>Overview</h3>
 <p>
-Association Rule Mining (ARM) discovers “if-then” relationships in transaction data (e.g., <em>If A happens, B tends to happen</em>).
-A rule is written as <code>A → B</code>.
-<strong>Support</strong> is the proportion of transactions that contain both A and B (how frequent the rule is overall).
-<strong>Confidence</strong> is the probability that B occurs given A occurs (how reliable the rule is).
-<strong>Lift</strong> compares confidence to the baseline probability of B; lift &gt; 1 indicates a positive association beyond chance.
-The <strong>Apriori</strong> algorithm finds frequent itemsets above a minimum support threshold and then generates rules that meet minimum confidence (and optionally lift),
-using the idea that all subsets of a frequent itemset must also be frequent.
+Association Rule Mining (ARM) discovers “if-then” patterns in transaction data using metrics:
+<strong>support</strong> (how often a rule occurs),
+<strong>confidence</strong> (how likely the consequent is given the antecedent),
+and <strong>lift</strong> (strength relative to chance).
+The <strong>Apriori</strong> algorithm finds frequent itemsets above a support threshold and generates rules from them.
 </p>
 
-<h3>(b) Data Prep</h3>
+<h3>Data Prep (Transaction Data)</h3>
 <p>
-ARM requires <strong>unlabeled transaction data</strong>, where each row is a “basket” of items (no class labels).
-In this project, I treated each <strong>over</strong> as a transaction (grouped by <code>match_id</code>, <code>innings</code>, and over number derived from <code>ball</code>).
-Each transaction contains items representing events such as: <code>WICKET</code>, <code>BOUNDARY</code>, <code>EXTRAS</code>, <code>DOT_HEAVY</code>, and <code>HIGH_RUN_OVER</code>.
-Below is a screenshot of the transaction-format dataset used for Apriori.
+ARM requires <strong>unlabeled transaction data</strong>. In this project, each <strong>over</strong> is treated as one transaction
+(grouped by <code>match_id</code>, <code>innings</code>, and over derived from <code>ball</code>).
+Items include: <code>WICKET</code>, <code>BOUNDARY</code>, <code>EXTRAS</code>, <code>HIGH_RUN_OVER</code>, <code>DOT_HEAVY</code>.
 </p>
 
-<!-- You must add this screenshot to imagesss/ -->
 <figure>
   <img src="imagesss/arm_transactions_sample.png" alt="ARM Transaction Sample">
-  <figcaption>Sample of transaction-format data (each row = one over transaction)</figcaption>
+  <figcaption>Sample of one-hot encoded transaction data (first rows).</figcaption>
 </figure>
 
-<ul>
-  <li>
-    Link to transaction sample CSV:
-    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/data/arm/arm_transactions_sample.csv" target="_blank">
-      arm_transactions_sample.csv
-    </a>
-  </li>
-</ul>
-
-<h3>(c) Code ARM</h3>
 <p>
-<strong>ARM Code:</strong>
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/arm_cricket.py" target="_blank">
-arm_cricket.py
-</a>
+Transaction sample CSV:
+<a href="outputs/arm_transactions_sample.csv" target="_blank">arm_transactions_sample.csv</a>
 </p>
 
-<h3>(d) Results</h3>
+<h3>Code</h3>
 <p>
-<strong>Thresholds used for Apriori:</strong>
-min_support = <em>PASTE YOUR VALUE</em>,
-min_confidence = <em>PASTE YOUR VALUE</em>,
-min_lift = <em>PASTE YOUR VALUE</em>.
+ARM Code:
+<a href="python/arm_cricket.py" target="_blank">arm_cricket.py</a>
 </p>
 
-<!-- You must generate and save these images in imagesss/ -->
+<h3>Results</h3>
+<p>
+Thresholds used: <code>min_support = 0.05</code>, <code>min_confidence = 0.30</code>, <code>lift &gt; 1.0</code>.
+</p>
+
 <h4>Top 15 Rules by Support</h4>
 <img src="imagesss/arm_top15_support.png" alt="Top 15 Support">
 
@@ -351,14 +240,14 @@ min_lift = <em>PASTE YOUR VALUE</em>.
 
 <h4>Network Visualization</h4>
 <figure>
-  <img src="imagesss/arm_network.png" alt="ARM Network Visualization">
-  <figcaption>Network visualization showing strong association rules between over-level events</figcaption>
+  <img src="imagesss/arm_network.png" alt="ARM Network">
+  <figcaption>Network visualization of top lift rules.</figcaption>
 </figure>
 
-<h3>(e) Conclusions</h3>
+<h3>Conclusion</h3>
 <p>
-ARM revealed which over-level events tend to occur together. Rules with high lift indicate event combinations that occur more often than chance,
-helping interpret match momentum (e.g., how wicket overs correlate with dot-heavy overs, or how boundary overs correlate with high-run overs).
+ARM highlights over-level event combinations that occur together more than expected by chance (lift &gt; 1),
+helping interpret match momentum patterns such as wicket-heavy or boundary-heavy overs.
 </p>
 </section>
 
@@ -367,8 +256,8 @@ helping interpret match momentum (e.g., how wicket overs correlate with dot-heav
 <h2>Conclusion</h2>
 <p>
 This project demonstrates a complete data science pipeline on cricket data.
-EDA identified scoring patterns, PCA reduced dimensionality and quantified information retention, clustering grouped players into performance profiles,
-and ARM discovered over-level event associations using Apriori.
+EDA identified scoring patterns, PCA reduced dimensionality, clustering grouped players,
+and ARM discovered event associations within overs.
 </p>
 </section>
 
