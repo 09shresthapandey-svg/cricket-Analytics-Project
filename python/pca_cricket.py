@@ -15,7 +15,7 @@ OUT_DIR = "outputs"
 os.makedirs(OUT_IMG, exist_ok=True)
 os.makedirs(OUT_DIR, exist_ok=True)
 
-df = pd.read_csv(CSV_PATH)
+df = pd.read_csv(data/cleaned/combined_30_matches.csv)
 
 
 numeric_cols = ["innings", "ball", "runs_off_bat", "extras"]
