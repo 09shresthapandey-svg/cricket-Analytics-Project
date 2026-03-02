@@ -55,87 +55,75 @@ Cricket Analytics Project
 <!-- INTRODUCTION -->
 <section id="introduction">
 <h2>Introduction</h2>
-
 <p>
-This project analyzes T20 cricket ball-by-ball data from Cricsheet using a full data science workflow.
-It includes data cleaning, exploratory data analysis (EDA), Principal Component Analysis (PCA),
-clustering (KMeans, Hierarchical, DBSCAN), and Association Rule Mining (ARM).
+This project analyzes T20 cricket ball-by-ball data using data cleaning, EDA,
+Principal Component Analysis (PCA), Clustering, and Association Rule Mining (ARM).
 </p>
 
 <figure>
-<img src="imagesss/cricketttt.jpg" alt="Cricket">
-<figcaption>Cricket match context.</figcaption>
+<img src="imagesss/cricketttt.jpg">
+<figcaption>Cricket context image.</figcaption>
 </figure>
 
 <figure>
-<img src="imagesss/team_runs.png" alt="Team Runs">
-<figcaption>Total runs by team (EDA insight).</figcaption>
+<img src="imagesss/team_runs.png">
+<figcaption>Total runs by team (EDA).</figcaption>
 </figure>
-
 </section>
 
-<!-- DATAPREP -->
+<!-- DATA PREP -->
 <section id="dataprep">
 <h2>Data Preparation & EDA</h2>
-
-<p>
-Dataset Source: 
-<a href="https://cricsheet.org" target="_blank">Cricsheet</a>
-</p>
 
 <div class="note">
 Cleaning Steps:
 <ul>
 <li>Standardized column names</li>
 <li>Removed _info files</li>
-<li>Kept key columns (match_id, innings, ball, runs_off_bat, extras, etc.)</li>
+<li>Combined 30 matches</li>
 <li>Dropped missing values</li>
 <li>Saved combined_30_matches.csv</li>
 </ul>
 </div>
 
+<h3>Raw vs Cleaned</h3>
 <figure><img src="imagesss/raw.png"><figcaption>Raw Data</figcaption></figure>
 <figure><img src="imagesss/cleaned.png"><figcaption>Cleaned Data</figcaption></figure>
 
 <h3>EDA Visualizations</h3>
-
 <figure><img src="imagesss/runs_distribution.png"><figcaption>Runs Distribution</figcaption></figure>
 <figure><img src="imagesss/wickets_per_match.png"><figcaption>Wickets per Match</figcaption></figure>
 <figure><img src="imagesss/top_batsmen.png"><figcaption>Top Batsmen</figcaption></figure>
 <figure><img src="imagesss/top_bowlers.png"><figcaption>Top Bowlers</figcaption></figure>
-<figure><img src="imagesss/team_runs.png"><figcaption>Team Runs</figcaption></figure>
 <figure><img src="imagesss/balls_vs_runs.png"><figcaption>Balls vs Runs</figcaption></figure>
 <figure><img src="imagesss/extras_distribution.png"><figcaption>Extras Distribution</figcaption></figure>
 <figure><img src="imagesss/runs_per_innings.png"><figcaption>Runs per Innings</figcaption></figure>
 <figure><img src="imagesss/correlation_heatmap.png"><figcaption>Correlation Heatmap</figcaption></figure>
 <figure><img src="imagesss/wicket_types.png"><figcaption>Wicket Types</figcaption></figure>
 
-<p>
-GitHub Repository: 
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
-View Project on GitHub
+<p><strong>Code:</strong></p>
+
+<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/extraction%20and%20cleaning.py" target="_blank">
+View Extraction & Cleaning Code
+</a><br><br>
+
+<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/EDA.py" target="_blank">
+View EDA Code
 </a>
-</p>
 
 </section>
 
 <!-- PCA -->
 <section id="pca">
-<h2>PCA (Principal Component Analysis)</h2>
-
-<p>
-PCA reduces numeric features (innings, ball, runs_off_bat, extras) into fewer components while preserving variance.
-StandardScaler was used before PCA.
-</p>
+<h2>PCA</h2>
 
 <figure><img src="imagesss/pca_2d.png"><figcaption>PCA 2D</figcaption></figure>
 <figure><img src="imagesss/pca_3d.png"><figcaption>PCA 3D</figcaption></figure>
 <figure><img src="imagesss/pca_cumulative_variance.png"><figcaption>Cumulative Variance</figcaption></figure>
 
 <p>
-PCA Code:
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
-View PCA Script
+<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/pca_cricket.py" target="_blank">
+View PCA Code
 </a>
 </p>
 
@@ -145,28 +133,21 @@ View PCA Script
 <section id="clustering">
 <h2>Clustering</h2>
 
-<p>
-KMeans, Hierarchical, and DBSCAN were applied to aggregated player statistics.
-Silhouette method was used to choose optimal k values.
-</p>
-
-<!-- IMPORTANT: Using your exact filename -->
+<!-- Using your exact filename -->
 <figure>
 <img src="imagesss/silhouettete_scores.png">
 <figcaption>Silhouette Scores</figcaption>
 </figure>
 
-<figure><img src="imagesss/kmeans_k1.png"><figcaption>KMeans (k1)</figcaption></figure>
-<figure><img src="imagesss/kmeans_k2.png"><figcaption>KMeans (k2)</figcaption></figure>
-<figure><img src="imagesss/kmeans_k3.png"><figcaption>KMeans (k3)</figcaption></figure>
-
-<figure><img src="imagesss/hierarchical_dendrogram.png"><figcaption>Hierarchical Dendrogram</figcaption></figure>
-<figure><img src="imagesss/dbscan_clusters.png"><figcaption>DBSCAN Clusters</figcaption></figure>
+<figure><img src="imagesss/kmeans_k1.png"><figcaption>KMeans k1</figcaption></figure>
+<figure><img src="imagesss/kmeans_k2.png"><figcaption>KMeans k2</figcaption></figure>
+<figure><img src="imagesss/kmeans_k3.png"><figcaption>KMeans k3</figcaption></figure>
+<figure><img src="imagesss/hierarchical_dendrogram.png"><figcaption>Hierarchical</figcaption></figure>
+<figure><img src="imagesss/dbscan_clusters.png"><figcaption>DBSCAN</figcaption></figure>
 
 <p>
-Clustering Code:
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
-View Clustering Script
+<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/clustering_cricket.py" target="_blank">
+View Clustering Code
 </a>
 </p>
 
@@ -174,22 +155,16 @@ View Clustering Script
 
 <!-- ARM -->
 <section id="arm">
-<h2>Association Rule Mining (ARM)</h2>
-
-<p>
-ARM was applied using Apriori algorithm. Each over was treated as a transaction.
-Metrics used: Support, Confidence, Lift.
-</p>
+<h2>Association Rule Mining</h2>
 
 <figure>
 <img src="imagesss/arm_network.png">
-<figcaption>ARM Network Visualization</figcaption>
+<figcaption>ARM Network</figcaption>
 </figure>
 
 <p>
-ARM Code:
-<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project" target="_blank">
-View ARM Script
+<a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/arm_cricket.py" target="_blank">
+View ARM Code
 </a>
 </p>
 
@@ -199,9 +174,8 @@ View ARM Script
 <section id="conclusion">
 <h2>Conclusion</h2>
 <p>
-This project demonstrates a complete data science pipeline on cricket data.
-EDA identified scoring patterns, PCA reduced dimensionality, clustering grouped players,
-and ARM discovered event associations within overs.
+This project demonstrates a complete data science pipeline on cricket data,
+including cleaning, EDA, PCA, clustering, and ARM.
 </p>
 </section>
 
@@ -210,7 +184,7 @@ and ARM discovered event associations within overs.
 <h2>About Me</h2>
 <p>
 Shrestha Pandey — Master's student at University of Colorado Boulder.
-Passionate about Data Science and Machine Learning.
+Interested in Machine Learning and Data Science.
 </p>
 </section>
 
