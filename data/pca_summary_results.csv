@@ -1,0 +1,4 @@
+metric,value
+Variance retained in 2D (%),55.66
+Variance retained in 3D (%),78.97
+Components needed for >=95% variance,4.0
