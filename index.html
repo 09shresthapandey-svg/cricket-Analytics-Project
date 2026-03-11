@@ -19,7 +19,7 @@ figcaption { font-size: 0.9em; color: #444; }
 footer { background: #f4f4f4; text-align: center; padding: 15px; }
 .note { background:#f7fff8; border-left:5px solid #0b3d2e; padding:12px; margin:18px 0; border-radius:6px; }
 code { background:#f2f2f2; padding:2px 6px; border-radius:4px; }
-ul { margin-left: 20px; }
+ul, ol { margin-left: 20px; }
 </style>
 </head>
 
@@ -87,6 +87,25 @@ insights for performance analysis, strategy understanding, and sports analytics 
   <img src="imagesss/team_runs.png" alt="Team Runs">
   <figcaption>Total runs by team (EDA insight).</figcaption>
 </figure>
+
+<h3>Project Research Questions</h3>
+
+<p>
+The following research questions guide the analysis performed in this project:
+</p>
+
+<ol>
+<li>What is the distribution of runs scored per ball in T20 cricket matches?</li>
+<li>Which batsmen score the most total runs across the analyzed matches?</li>
+<li>Which bowlers take the highest number of wickets in the dataset?</li>
+<li>How do total runs differ across teams and innings?</li>
+<li>What relationship exists between balls faced and total runs scored by players?</li>
+<li>How frequently do extras occur and how do they impact total scoring?</li>
+<li>Can Principal Component Analysis (PCA) effectively reduce cricket performance features while retaining most of the variance?</li>
+<li>Can clustering techniques group players based on batting performance and playing style?</li>
+<li>What patterns of match events frequently occur together within overs?</li>
+<li>How can Association Rule Mining reveal relationships between wickets, boundaries, extras, and high-scoring overs?</li>
+</ol>
 </section>
 
 <!-- DATAPREP -->
@@ -134,19 +153,18 @@ Cleaning Steps:
   <li>
     Extraction + Cleaning Code:
     <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/extraction%20and%20cleaning.py" target="_blank">
-extraction and cleaning.py
-</a>
+      extraction and cleaning.py
+    </a>
   </li>
   <li>
     EDA Code:
     <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/EDA.py" target="_blank">
-EDA.py
-</a>
+      EDA.py
+    </a>
   </li>
 </ul>
 </section>
 
-<!-- PCA -->
 <!-- PCA -->
 <section id="pca">
 <h2>PCA (Principal Component Analysis)</h2>
@@ -189,7 +207,7 @@ Prepared PCA dataset:
 
 <p>
 2D PCA-transformed dataset:
-<a href="data/pca_2d_coordinates.csv" target="_blank">pca_2d_coordinates.csv</a>
+<a href="outputs/pca_2d_coordinates.csv" target="_blank">pca_2d_coordinates.csv</a>
 </p>
 
 <figure>
@@ -199,7 +217,7 @@ Prepared PCA dataset:
 
 <p>
 3D PCA-transformed dataset:
-<a href="data/pca_3d_coordinates.csv" target="_blank">pca_3d_coordinates.csv</a>
+<a href="outputs/pca_3d_coordinates.csv" target="_blank">pca_3d_coordinates.csv</a>
 </p>
 
 <figure>
@@ -278,7 +296,6 @@ pca_cricket.py
 </section>
 
 <!-- CLUSTERING -->
-<!-- CLUSTERING -->
 <section id="clustering">
 <h2>Clustering</h2>
 
@@ -301,7 +318,7 @@ The labeled dataset was built by grouping ball-by-ball cricket data by <code>str
 
 <p>
 Labeled dataset:
-<a href="data/cluster_labeled_dataset.csv" target="_blank">cluster_labeled_dataset.csv</a>
+<a href="outputs/cluster_labeled_dataset.csv" target="_blank">cluster_labeled_dataset.csv</a>
 </p>
 
 <figure>
@@ -316,7 +333,7 @@ Before clustering, the player label was removed and saved separately. Only quant
 
 <p>
 Unlabeled quantitative dataset:
-<a href="data/cluster_unlabeled_data.csv" target="_blank">cluster_unlabeled_data.csv</a>
+<a href="outputs/cluster_unlabeled_data.csv" target="_blank">cluster_unlabeled_data.csv</a>
 </p>
 
 <figure>
@@ -331,12 +348,12 @@ The quantitative dataset was normalized using <code>StandardScaler</code>, which
 
 <p>
 Normalized dataset:
-<a href="data/cluster_scaled_data.csv" target="_blank">cluster_scaled_data.csv</a>
+<a href="outputs/cluster_scaled_data.csv" target="_blank">cluster_scaled_data.csv</a>
 </p>
 
 <p>
 3D PCA clustering dataset:
-<a href="data/cluster_pca_3d_data.csv" target="_blank">cluster_pca_3d_data.csv</a>
+<a href="outputs/cluster_pca_3d_data.csv" target="_blank">cluster_pca_3d_data.csv</a>
 </p>
 
 <figure>
@@ -442,7 +459,6 @@ clustering_cricket.py
 </section>
 
 <!-- ARM -->
-<!-- ARM -->
 <section id="arm">
 <h2>Association Rule Mining (ARM)</h2>
 
@@ -484,7 +500,7 @@ Before one-hot encoding, each over was converted into a transaction containing i
 
 <p>
 Raw transaction sample:
-<a href="data/arm_raw_transactions_sample.csv" target="_blank">arm_raw_transactions_sample.csv</a>
+<a href="outputs/arm_raw_transactions_sample.csv" target="_blank">arm_raw_transactions_sample.csv</a>
 </p>
 
 <figure>
@@ -494,7 +510,7 @@ Raw transaction sample:
 
 <p>
 One-hot encoded transaction sample:
-<a href="data/arm_transactions_sample.csv" target="_blank">arm_transactions_sample.csv</a>
+<a href="outputs/arm_transactions_sample.csv" target="_blank">arm_transactions_sample.csv</a>
 </p>
 
 <figure>
@@ -567,33 +583,6 @@ From a cricket perspective, ARM helps show that overs often follow recognizable 
 
 <p>
 Overall, ARM adds value to this project by uncovering hidden event relationships that are difficult to notice just by looking at raw tables or summary statistics. It provides a practical way to understand match situations, momentum changes, and recurring over-level behavior in cricket.
-</p>
-</section>
-
-<h3>Results</h3>
-<p>
-Thresholds used: <code>min_support = 0.05</code>, <code>min_confidence = 0.30</code>, <code>lift &gt; 1.0</code>.
-</p>
-
-<h4>Top 15 Rules by Support</h4>
-<img src="imagesss/arm_top15_support.png" alt="Top 15 Support">
-
-<h4>Top 15 Rules by Confidence</h4>
-<img src="imagesss/arm_top15_confidence.png" alt="Top 15 Confidence">
-
-<h4>Top 15 Rules by Lift</h4>
-<img src="imagesss/arm_top15_lift.png" alt="Top 15 Lift">
-
-<h4>Network Visualization</h4>
-<figure>
-  <img src="imagesss/arm_network.png" alt="ARM Network">
-  <figcaption>Network visualization of top lift rules.</figcaption>
-</figure>
-
-<h3>Conclusion</h3>
-<p>
-ARM highlights over-level event combinations that occur together more than expected by chance (lift &gt; 1),
-helping interpret match momentum patterns such as wicket-heavy or boundary-heavy overs.
 </p>
 </section>
 
