@@ -1,0 +1,3 @@
+metric,value
+Variance retained after PCA to 3D (%),89.57
+Top silhouette k values,"[2, 3, 7]"
