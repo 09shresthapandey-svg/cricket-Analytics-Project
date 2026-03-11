@@ -1,0 +1,6 @@
+metric,value
+Minimum Support,0.05
+Minimum Confidence,0.3
+Minimum Lift,1.0
+Number of Frequent Itemsets,19.0
+Number of Rules After Filtering,18.0
