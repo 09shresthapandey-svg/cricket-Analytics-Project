@@ -158,7 +158,84 @@
       </li>
     </ul>
   </section>
+<h2>Train–Test Split</h2>
 
+<p>
+To evaluate machine learning algorithms reliably, the dataset must be divided into two disjoint subsets: 
+<strong>training data</strong> and <strong>testing data</strong>. The train–test split prevents information leakage and ensures 
+that the model is evaluated on completely unseen records.
+</p>
+
+<div class="note">
+  <strong>Why the Split Must Be Disjoint:</strong>
+  <ul>
+    <li>Prevents the model from memorizing patterns from the test set</li>
+    <li>Ensures unbiased evaluation</li>
+    <li>Simulates real-world performance where new data is unknown</li>
+    <li>Avoids inflated accuracy and misleading results</li>
+  </ul>
+</div>
+
+<h3>How the Split Was Created</h3>
+<p>
+The dataset was split using <code>train_test_split()</code> from scikit-learn with:
+</p>
+
+<ul>
+  <li><strong>Test size:</strong> 20%</li>
+  <li><strong>Random state:</strong> 42 (to ensure reproducibility)</li>
+  <li><strong>Stratification:</strong> Used where applicable (for classification algorithms)</li>
+</ul>
+
+<h3>Train–Test Split Consistency Across Algorithms</h3>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Algorithm</th>
+      <th>Is Split Same?</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Decision Tree</td>
+      <td>Yes</td>
+      <td>Used the same 80–20 split</td>
+    </tr>
+    <tr>
+      <td>Naïve Bayes</td>
+      <td>Yes</td>
+      <td>Used same split for consistency & fair comparison</td>
+    </tr>
+    <tr>
+      <td>Logistic Regression</td>
+      <td>Yes</td>
+      <td>Same input training and testing sets used</td>
+    </tr>
+    <tr>
+      <td>Ensemble Methods</td>
+      <td>Yes</td>
+      <td>Random Forest & Bagging models used same split</td>
+    </tr>
+    <tr>
+      <td>SVM</td>
+      <td>Yes</td>
+      <td>Uses identical split for reproducibility</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+All algorithms use the same train–test split to ensure fair and directly comparable performance metrics.
+If any algorithm later requires a different split (e.g., due to imbalance or different problem setup), 
+it will be noted separately under that algorithm’s section.
+</p>
+
+<figure>
+  <img src="imagesss/train_test_split_.png" alt="Train Test Split Preview">
+  <figcaption>Preview of train and test subsets.</figcaption>
+</figure>
   <!-- PCA -->
   <section id="pca">
     <h2>PCA (Principal Component Analysis)</h2>
