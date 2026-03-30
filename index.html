@@ -41,6 +41,9 @@
     <a onclick="showSection('pca')">PCA</a>
     <a onclick="showSection('clustering')">Clustering</a>
     <a onclick="showSection('arm')">ARM</a>
+    <a onclick="showSection('naivebayes')">Naïve Bayes</a>
+    <a onclick="showSection('decisiontree')">Decision Tree</a>
+    <a onclick="showSection('regression')">Regression</a>
     <a onclick="showSection('conclusion')">Conclusion</a>
     <a onclick="showSection('about')">About Me</a>
   </nav>
@@ -59,23 +62,19 @@
     <h2>Introduction</h2>
 
     <p>
-      This project analyzes T20 cricket ball-by-ball data from Cricsheet using a full data science workflow.
-      It includes data cleaning, exploratory data analysis (EDA), Principal Component Analysis (PCA),
-      clustering (KMeans, Hierarchical, DBSCAN), and Association Rule Mining (ARM).
+      Cricket is more than just a sport; it is a passion shared by millions of people around the world. From local matches played in neighborhoods to international tournaments watched by global audiences, cricket brings together fans of all ages and backgrounds. Over time, the game has evolved not only in how it is played but also in how it is understood. Today, fans and teams alike are increasingly interested in deeper insights that go beyond what is visible on the field.
     </p>
 
     <p>
-      The main goal of this project is to better understand match patterns, player performance, and scoring behavior
-      in T20 cricket through statistical and machine learning techniques. By working with ball-by-ball data, the
-      project captures detailed events from each delivery, making it possible to study how runs, wickets, extras,
-      and innings dynamics contribute to the overall flow of a match.
+      Traditionally, cricket has been followed through basic statistics such as runs, wickets, and averages. While these numbers provide a general understanding of player and team performance, they often fail to capture the full picture. For example, two players may score the same number of runs, but the impact of those runs on the match outcome could be very different. This highlights the need for a more detailed and thoughtful approach to analyzing the game.
     </p>
 
     <p>
-      This website presents the project in a structured way, beginning with data preparation and EDA, followed by
-      dimensionality reduction with PCA, player grouping through clustering, and event-pattern discovery using
-      Association Rule Mining. Together, these methods demonstrate how cricket data can be transformed into useful
-      insights for performance analysis, strategy understanding, and sports analytics learning.
+      In recent years, the availability of data has opened new opportunities to explore cricket in more meaningful ways. By examining patterns, trends, and performances over time, it becomes possible to uncover insights that were previously overlooked. These insights can help fans better understand the game, allow commentators to provide richer analysis, and give teams new perspectives when making decisions. As a result, cricket is no longer just about watching the game—it is also about understanding the story behind the numbers.
+    </p>
+
+    </p>
+        This project focuses on exploring cricket through a more analytical lens while still keeping the experience engaging and accessible. The goal is to present information in a way that is easy to understand, visually appealing, and meaningful to a wide audience. By combining the excitement of cricket with clear and insightful representations of data, this project aims to enhance how the game is experienced and appreciated by fans.
     </p>
 
     <figure>
@@ -575,6 +574,312 @@
       Overall, ARM adds value to this project by uncovering hidden event relationships that are difficult to notice just by looking at raw tables or summary statistics. It provides a practical way to understand match situations, momentum changes, and recurring over-level behavior in cricket.
     </p>
   </section>
+
+  <!-- NAIVE BAYES -->
+<section id="naivebayes">
+  <h2>Naïve Bayes</h2>
+
+  <!-- (a) OVERVIEW -->
+  <h3>(a) Overview</h3>
+
+  <p>
+    Naïve Bayes is a supervised learning method used for classification tasks. It works by using probability to predict the class of a data point based on its features. The method is based on Bayes’ Theorem and assumes that all features are independent of each other, which is why it is called “naïve.”
+  </p>
+
+  <p>
+    Naïve Bayes is commonly used because it is simple, fast, and performs well even with large datasets. It is often applied in classification problems such as text classification, spam detection, and categorical predictions. Despite its simplicity, it can produce strong results when the data matches its assumptions reasonably well.
+  </p>
+
+  <p>
+    There are different types of Naïve Bayes models depending on the type of data being used. Multinomial Naïve Bayes is used for count-based data such as frequencies. Gaussian Naïve Bayes is used when features are continuous and normally distributed. Bernoulli Naïve Bayes is used for binary features (0/1 values). Categorical Naïve Bayes is used for discrete categorical features. Each version is suited for different types of datasets, and choosing the right one depends on the structure of the data.
+  </p>
+ <p>
+  In summary, Multinomial Naïve Bayes is best suited for count-based data, 
+  Gaussian Naïve Bayes is ideal for continuous numerical features, and 
+  Bernoulli Naïve Bayes is appropriate for binary data. Choosing the correct 
+  version of Naïve Bayes is important because it directly affects model 
+  performance and how well the data assumptions are satisfied.
+</p>
+  <!-- (b) DATA PREP -->
+  <h3>(b) Data Preparation</h3>
+
+  <p>
+    For supervised learning, the dataset must include a target label. In this project, a classification label was created to represent match events such as scoring categories. The dataset was split into a training set and a testing set. The training set is used to build the model, while the testing set is used to evaluate how well the model performs on unseen data.
+  </p>
+
+  <p>
+    The training and testing sets must be disjoint, meaning no overlap between them. This ensures that the model is evaluated fairly and prevents it from simply memorizing the data instead of learning patterns.
+  </p>
+
+  <figure>
+    <img src="imagesss/nb_dataset.png" alt="NB Dataset">
+    <figcaption>Prepared dataset for Naïve Bayes classification.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/train_test_split.png" alt="Train Test Split">
+    <figcaption>Training and testing dataset split.</figcaption>
+  </figure>
+
+  <p>
+  The dataset was split into training and testing sets using a 70-30 split. 
+  The training set is used to build the model, while the testing set is used 
+  to evaluate performance on unseen data. These two datasets are completely 
+  separate (disjoint), meaning no rows overlap between them. This is important 
+  because it ensures that the model is tested fairly and does not simply 
+  memorize the training data.
+</p>
+
+  <p>
+    Dataset used:
+    <a href="data/nb_dataset.csv" target="_blank">nb_dataset.csv</a>
+  </p>
+
+  <!-- (c) CODE -->
+  <h3>(c) Code</h3>
+
+  <p>
+    Python code for Naïve Bayes implementation:
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/naive_bayes_cricket.py" target="_blank">
+      naive_bayes_cricket.py
+    </a>
+  </p>
+
+  <!-- (d) RESULTS -->
+  <h3>(d) Results</h3>
+
+  <figure>
+    <img src="imagesss/nb_confusion_matrix_mnb.png" alt="MNB Confusion Matrix">
+    <figcaption>Confusion Matrix - Multinomial Naïve Bayes</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/nb_confusion_matrix_gnb.png" alt="GNB Confusion Matrix">
+    <figcaption>Confusion Matrix - Gaussian Naïve Bayes</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/nb_confusion_matrix_bnb.png" alt="BNB Confusion Matrix">
+    <figcaption>Confusion Matrix - Bernoulli Naïve Bayes</figcaption>
+  </figure>
+
+  <div class="note">
+  <strong>Model Accuracy:</strong>
+  <ul>
+    <li>Multinomial NB: <strong>95.86%</strong></li>
+    <li>Gaussian NB: <strong>99.95%</strong></li>
+    <li>Bernoulli NB: <strong>81.19%</strong></li>
+  </ul>
+</div>
+
+    <p>
+  The Gaussian Naïve Bayes model achieved the highest accuracy among the three models. 
+  This is likely because the dataset contains continuous numerical features that align well 
+  with Gaussian assumptions.The high accuracy of Gaussian NB suggests that the classification task is relatively simple 
+  given the chosen features and label structure.Multinomial Naïve Bayes also performed strongly due to the nature 
+  of count-based features in cricket data. Bernoulli Naïve Bayes showed lower accuracy because 
+  it is better suited for binary data, which does not fully represent the dataset used in this project.
+</p>
+  
+
+  <!-- (e) CONCLUSION -->
+  <h3>(e) Conclusions</h3>
+
+ <p>
+  From this analysis, Naïve Bayes demonstrates that simple probabilistic models can effectively classify cricket match events. Among the three models, Gaussian Naïve Bayes achieved the highest accuracy, indicating that the dataset’s continuous numerical features align well with its assumptions. Multinomial Naïve Bayes also performed strongly, while Bernoulli Naïve Bayes showed lower performance due to its limitation to binary features.
+</p>
+
+<p>
+  This analysis highlights how the choice of model depends heavily on the type of data being used. In the context of cricket analytics, these models can be useful for predicting scoring patterns, understanding match situations, and classifying events during gameplay. Overall, this section shows that even simple models can provide meaningful insights when applied correctly to sports data.
+</p>
+
+</section>
+
+<!-- DECISION TREE -->
+<section id="decisiontree">
+  <h2>Decision Tree</h2>
+
+  <!-- (a) OVERVIEW -->
+  <h3>(a) Overview</h3>
+
+  <p>
+    A Decision Tree is a supervised learning method used for classification tasks. It works by splitting 
+    the dataset into smaller groups based on feature values, forming a tree-like structure of decisions. 
+    Each internal node represents a decision, each branch represents an outcome, and each leaf node 
+    represents a final prediction.
+  </p>
+
+  <p>
+    Decision Trees are widely used because they are easy to interpret and can handle both numerical 
+    and categorical data. They mimic human decision-making and are useful for predicting outcomes 
+    and understanding patterns in data.
+  </p>
+
+  <p>
+    To determine the best split, Decision Trees use measures such as Gini Index and Entropy. 
+    Gini measures impurity in a dataset, while Entropy measures uncertainty. Information Gain 
+    calculates how much a split reduces uncertainty. The split with the highest Information Gain 
+    is selected as the best split.
+  </p>
+
+  <p>
+  For example, consider a dataset with two classes: HIGH and LOW scoring events. 
+  If a node contains 50% HIGH and 50% LOW, the entropy is high (maximum uncertainty). 
+  If a split results in one group with mostly HIGH and another with mostly LOW, the 
+  entropy decreases. The reduction in entropy after the split is called Information Gain. 
+  A higher Information Gain indicates a better split because it improves class separation.
+</p>
+
+
+  <p>
+    It is possible to create an infinite number of decision trees because there are many ways to 
+    split the data at each node. Different features, split values, and tree depths can result in 
+    completely different trees. This is why constraints like maximum depth are used to control complexity.
+  </p>
+
+  <figure>
+    <img src="imagesss/dt_tree1.png" alt="Decision Tree Example">
+    <figcaption>Example decision tree visualization.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/dt_tree2.png" alt="Decision Tree Structure">
+    <figcaption>Another decision tree with different structure.</figcaption>
+  </figure>
+
+  <!-- (b) DATA PREP -->
+  <h3>(b) Data Preparation</h3>
+
+  <p>
+    The dataset used for Decision Tree modeling is the same as the one used in the Naïve Bayes section. 
+    A classification label was created to represent scoring categories. The dataset was split into 
+    training and testing sets using a 70-30 split.
+  </p>
+
+  <p>
+    The training and testing sets are disjoint, meaning there is no overlap between them. This ensures 
+    that the model is evaluated fairly and does not memorize the data.
+  </p>
+
+  <figure>
+    <img src="imagesss/nb_dataset.png" alt="Dataset">
+    <figcaption>Dataset used for Decision Tree modeling.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/train_test_split.png" alt="Train Test Split">
+    <figcaption>Training and testing datasets.</figcaption>
+  </figure>
+
+  <p>
+    Dataset used:
+    <a href="data/dt_dataset.csv" target="_blank">dt_dataset.csv</a>
+  </p>
+
+  <!-- (c) CODE -->
+  <h3>(c) Code</h3>
+
+  <p>
+    Python code for Decision Tree:
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/decision_tree_cricket.py" target="_blank">
+      decision_tree_cricket.py
+    </a>
+  </p>
+
+  <!-- (d) RESULTS -->
+  <h3>(d) Results</h3>
+
+  <figure>
+    <img src="imagesss/dt_tree1.png">
+    <figcaption>Decision Tree 1 (max_depth=3)</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/dt_tree2.png">
+    <figcaption>Decision Tree 2 (max_depth=5)</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/dt_tree3.png">
+    <figcaption>Decision Tree 3 (entropy criterion)</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/dt_confusion_matrix.png">
+    <figcaption>Confusion Matrix</figcaption>
+  </figure>
+
+  <div class="note">
+    <strong>Model Accuracy:</strong> <strong>81.19%</strong>
+  </div>
+
+  <p>
+    The Decision Tree model achieved an accuracy of 81.19% on the testing dataset. 
+    This indicates that the model captures meaningful patterns while still making 
+    some errors, which is expected in real-world data.
+  </p>
+
+  <p>
+    The three decision trees produced different structures due to variations in depth 
+    and splitting criteria. Simpler trees are easier to interpret, while deeper trees 
+    capture more complex patterns.
+  </p>
+
+  <p>
+  Each tree begins with different root splits due to variations in model parameters 
+  such as depth and splitting criteria. This results in different decision paths and 
+  shows how multiple tree structures can be generated from the same dataset.
+</p>
+
+  <!-- (e) CONCLUSION -->
+  <h3>(e) Conclusions</h3>
+
+  <p>
+    Decision Trees provide an intuitive way to classify cricket match events. They show 
+    how different features influence outcomes and provide clear decision paths. This makes 
+    them useful for understanding patterns and making predictions in cricket analytics.
+  </p>
+
+</section>
+
+<section id="regression">
+  <h2>Regression</h2>
+
+<h2>Regression TAB</h2>
+
+<h3>(a) Define and explain linear regression</h3>
+<p>Linear regression models the relationship between a dependent variable and one or more independent variables. It predicts continuous values by fitting a linear equation to the data. The output is a weighted sum of the input features.</p>
+
+<h3>(b) Define and explain logistic regression</h3>
+<p>Logistic regression predicts binary outcomes (0/1, yes/no) using a linear combination of features mapped through the sigmoid function. The output is a probability between 0 and 1, which can then be classified using a threshold.</p>
+
+<h3>(c) How are they similar and different?</h3>
+<p>Both use linear combinations of input features and optimization for training. Linear regression predicts continuous values, while logistic regression predicts probabilities for categories. Logistic regression uses a sigmoid function and maximum likelihood estimation, unlike linear regression.</p>
+
+<h3>(d) Does logistic regression use the Sigmoid function?</h3>
+<p>Yes. The sigmoid function converts the linear combination of inputs into a probability between 0 and 1. This allows classification into binary categories.</p>
+
+<h3>(e) Explain how maximum likelihood is connected to logistic regression</h3>
+<p>Maximum likelihood estimation (MLE) finds parameters that maximize the probability of observing the data. Logistic regression uses MLE to optimize weights so that predicted probabilities match the actual class labels as closely as possible.</p>
+
+<h3>Dataset Info</h3>
+<p><strong>Columns:</strong> striker, balls_faced, total_runs, total_extras_seen, avg_runs_per_ball, boundary_rate, dot_ball_rate</p>
+<p><strong>Logistic Regression Accuracy:</strong> 0.9398</p>
+<p><strong>Naive Bayes Accuracy:</strong> 0.9023</p>
+
+<h3>Logistic Regression Confusion Matrix</h3>
+<img src="cm_lr.png" alt="Logistic Regression Confusion Matrix">
+
+<h3>Naive Bayes Confusion Matrix</h3>
+<img src="cm_nb.png" alt="Naive Bayes Confusion Matrix">
+
+<h3>Links</h3>
+<p>Dataset : <a href="/Users/shresthapandey/python/cluster_labeled_dataset.csv">View CSV</a></p>
+<p>Python Code: <a href="regression.py">View Code</a></p>
+
+</body>
+</html>
+
 
   <!-- CONCLUSION -->
   <section id="conclusion">
