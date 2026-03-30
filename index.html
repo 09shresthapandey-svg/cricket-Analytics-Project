@@ -600,6 +600,25 @@
   version of Naïve Bayes is important because it directly affects model 
   performance and how well the data assumptions are satisfied.
 </p>
+
+  <!-- (c) Why Smoothing is Required -->
+<h3>(c) Smoothing in Naïve Bayes</h3>
+<p>
+  Smoothing is necessary in Naïve Bayes to handle the problem of zero probabilities. 
+  If a feature value does not appear in the training data for a class, the probability 
+  becomes zero, which can incorrectly dominate the prediction. Laplace smoothing 
+  (adding 1 to counts) prevents this issue and ensures that every possible feature 
+  has a non-zero probability, making the model more robust for unseen data.
+</p>
+
+<!-- (d) Bernoulli Naïve Bayes -->
+<h3>(d) Bernoulli Naïve Bayes</h3>
+<p>
+  Bernoulli Naïve Bayes is suited for binary features, such as yes/no or 0/1. 
+  It models the presence or absence of a feature rather than the count. 
+  This is useful when predicting whether an event occurs (e.g., boundary in a ball) 
+  rather than how many times it occurs.
+</p>
   <!-- (b) DATA PREP -->
   <h3>(b) Data Preparation</h3>
 
@@ -680,7 +699,7 @@
   of count-based features in cricket data. Bernoulli Naïve Bayes showed lower accuracy because 
   it is better suited for binary data, which does not fully represent the dataset used in this project.
 </p>
-  
+
 
   <!-- (e) CONCLUSION -->
   <h3>(e) Conclusions</h3>
@@ -735,6 +754,14 @@
     It is possible to create an infinite number of decision trees because there are many ways to 
     split the data at each node. Different features, split values, and tree depths can result in 
     completely different trees. This is why constraints like maximum depth are used to control complexity.
+  </p>
+
+  <h3>(b) Gini, Entropy, and Information Gain</h3>
+  <p>
+    Gini impurity measures the probability of misclassifying a randomly chosen element if it were randomly labeled according to the distribution of labels in the subset. 
+    Entropy measures the disorder or uncertainty in a dataset. 
+    Information Gain calculates the reduction in entropy or impurity after a split. 
+    Features with higher information gain are chosen for splitting nodes to improve prediction accuracy.
   </p>
 
   <figure>
@@ -847,6 +874,12 @@
 
 <h2>Regression TAB</h2>
 
+   <p>
+    Regression is a supervised learning method used to predict continuous outcomes. 
+    In this project, it predicts numerical match performance metrics such as runs per player or overs. 
+    The model learns the relationship between input features and output values using linear or nonlinear functions.
+  </p>
+
 <h3>(a) Define and explain linear regression</h3>
 <p>Linear regression models the relationship between a dependent variable and one or more independent variables. It predicts continuous values by fitting a linear equation to the data. The output is a weighted sum of the input features.</p>
 
@@ -888,6 +921,83 @@
 
 </body>
 </html>
+
+<!-- ALGORITHM COMPARISON -->
+<section id="algorithm_comparison">
+  <h2>Comparison of Algorithms</h2>
+
+  <table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Algorithm</th>
+        <th>Accuracy / R²</th>
+        <th>Strengths</th>
+        <th>Weaknesses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Naïve Bayes</td>
+        <td>85%</td>
+        <td>Fast, simple, good for count-based data</td>
+        <td>Assumes feature independence, may misclassify overlapping features</td>
+      </tr>
+      <tr>
+        <td>Decision Tree</td>
+        <td>88%</td>
+        <td>Interpretable, handles categorical data well</td>
+        <td>Can overfit, sensitive to small changes in data</td>
+      </tr>
+      <tr>
+        <td>Regression</td>
+        <td>R² = 0.79</td>
+        <td>Predicts continuous outcomes, interpretable coefficients</td>
+        <td>Assumes linearity, sensitive to outliers</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Overall, Naïve Bayes works best for categorical/count-based events, Decision Trees provide interpretable rules with good classification performance, 
+    and Regression predicts continuous outcomes. Choice of algorithm depends on the type of target variable and data characteristics.
+  </p>
+</section>
+<!-- TRAIN/TEST SPLIT -->
+<section id="train_test_split">
+  <h2>Train/Test Split</h2>
+
+  <h3>(a) Overview</h3>
+  <p>
+    To evaluate our models fairly, the dataset was divided into training and testing sets. 
+    The training set is used to fit the model, while the testing set assesses performance on unseen data. 
+    Typically, an 80/20 split is applied depending on dataset size.
+  </p>
+
+  <h3>(b) Split Methodology</h3>
+  <ul>
+    <li>Randomly shuffle the full dataset to avoid any ordering bias.</li>
+    <li>Allocate 80% of the data for training and 20% for testing.</li>
+    <li>Ensure each class label is proportionally represented (stratified split) to maintain balance.</li>
+  </ul>
+
+  <h3>(c) Sample Training Data</h3>
+  <figure>
+    <img src="imagesss/train_sample.png" alt="Training Sample Data">
+    <figcaption>Example of training dataset entries after preprocessing.</figcaption>
+  </figure>
+
+  <h3>(d) Sample Testing Data</h3>
+  <figure>
+    <img src="imagesss/test_sample.png" alt="Testing Sample Data">
+    <figcaption>Example of testing dataset entries used for model evaluation.</figcaption>
+  </figure>
+
+  <h3>(e) Summary</h3>
+  <p>
+    This split ensures that the models are trained on sufficient data while retaining a separate set to evaluate generalization. 
+    All subsequent model evaluations—including Naïve Bayes, Decision Tree, and Regression—use this train/test split.
+  </p>
+</section>
 
 
   <!-- CONCLUSION -->
