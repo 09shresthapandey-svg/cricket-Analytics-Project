@@ -958,34 +958,6 @@
     Overall, Naïve Bayes works best for categorical/count-based events, Decision Trees provide interpretable rules with good classification performance, 
     and Regression predicts continuous outcomes. Choice of algorithm depends on the type of target variable and data characteristics.
   </p>
-<!-- TRAIN/TEST SPLIT -->
-  <h2>Train/Test Split</h2>
-
-  <h3>(a) Overview</h3>
-  <p>
-    To evaluate our models fairly, the dataset was divided into training and testing sets. 
-    The training set is used to fit the model, while the testing set assesses performance on unseen data. 
-    Typically, an 80/20 split is applied depending on dataset size.
-  </p>
-
-  <h3>(b) Split Methodology</h3>
-  <ul>
-    <li>Randomly shuffle the full dataset to avoid any ordering bias.</li>
-    <li>Allocate 80% of the data for training and 20% for testing.</li>
-    <li>Ensure each class label is proportionally represented (stratified split) to maintain balance.</li>
-  </ul>
-
-  <h3>(c) Sample Training/Testing Data</h3>
-  <figure>
-    <img src="imagesss/train_test_split.png" alt="Training Sample Data">
-    <figcaption>Example of training dataset entries after preprocessing.</figcaption>
-  </figure>
-
-  <h3>(e) Summary</h3>
-  <p>
-    This split ensures that the models are trained on sufficient data while retaining a separate set to evaluate generalization. 
-    All subsequent model evaluations—including Naïve Bayes, Decision Tree, and Regression—use this train/test split.
-  </p>
 </section>
 
 
