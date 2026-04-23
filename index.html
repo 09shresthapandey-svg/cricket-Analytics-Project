@@ -1257,6 +1257,14 @@ it will be noted separately under that algorithm’s section.
     The Linear kernel with C=10 achieved perfect accuracy of 100% on the test set, making it the best performing kernel for this cricket dataset. This is a surprising result — it suggests that once the data is properly scaled, the batting performance features (balls faced, boundary rate, dot ball rate, etc.) are actually linearly separable in the feature space. The Polynomial kernel came second at 98.88%, while the RBF kernel, despite being the most flexible, performed worst at 97.75% best — likely because the dataset is small and the RBF kernel's complexity is not needed here. The cost parameter C had a clear and consistent effect across all kernels: higher C values generally improved accuracy for Linear and Polynomial, while for RBF the sweet spot was C=1 with accuracy dropping at C=10, suggesting mild overfitting at higher cost.
   </p>
 
+  <!-- (e) CONCLUSIONS -->
+  <h3>(e) Conclusions</h3>
+
+  <p>
+    From this SVM analysis on cricket batting data, the most important finding is that batting performance features are surprisingly linearly separable — the Linear kernel with C=10 achieved perfect 100% accuracy on the test set. This tells us that the features we engineered (balls faced, total runs, boundary rate, dot ball rate, average runs per ball) create very clean and distinct groups of High Scorers and Low Scorers that even a simple linear boundary can perfectly separate. The cost parameter C matters significantly — too low a value (C=0.1) allows too many misclassifications, while the right value (C=10 for Linear, C=1 for RBF) finds the optimal balance between margin width and classification accuracy. SVMs confirm what was found in earlier clustering modules — that cricket batting styles do form natural, distinguishable groups that machine learning can detect reliably.
+  </p>
+
+</section>
   <!-- ENSEMBLE -->
 <section id="ensemble">
   <h2>Ensemble Learning</h2>
@@ -1348,14 +1356,6 @@ it will be noted separately under that algorithm’s section.
 
 </section>
 
-  <!-- (e) CONCLUSIONS -->
-  <h3>(e) Conclusions</h3>
-
-  <p>
-    From this SVM analysis on cricket batting data, the most important finding is that batting performance features are surprisingly linearly separable — the Linear kernel with C=10 achieved perfect 100% accuracy on the test set. This tells us that the features we engineered (balls faced, total runs, boundary rate, dot ball rate, average runs per ball) create very clean and distinct groups of High Scorers and Low Scorers that even a simple linear boundary can perfectly separate. The cost parameter C matters significantly — too low a value (C=0.1) allows too many misclassifications, while the right value (C=10 for Linear, C=1 for RBF) finds the optimal balance between margin width and classification accuracy. SVMs confirm what was found in earlier clustering modules — that cricket batting styles do form natural, distinguishable groups that machine learning can detect reliably.
-  </p>
-
-</section>
 
 
   <!-- CONCLUSION -->
