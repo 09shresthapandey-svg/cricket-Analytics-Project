@@ -45,6 +45,7 @@
     <a onclick="showSection('decisiontree')">Decision Tree</a>
     <a onclick="showSection('regression')">Regression</a>
      <a onclick="showSection('svm')">SVM</a>
+    <a onclick="showSection('ensemble')">Ensemble</a>
      <a onclick="showSection('conclusion')">Conclusion</a>
     <a onclick="showSection('about')">About Me</a>
   </nav>
@@ -1255,6 +1256,97 @@ it will be noted separately under that algorithm’s section.
   <p>
     The Linear kernel with C=10 achieved perfect accuracy of 100% on the test set, making it the best performing kernel for this cricket dataset. This is a surprising result — it suggests that once the data is properly scaled, the batting performance features (balls faced, boundary rate, dot ball rate, etc.) are actually linearly separable in the feature space. The Polynomial kernel came second at 98.88%, while the RBF kernel, despite being the most flexible, performed worst at 97.75% best — likely because the dataset is small and the RBF kernel's complexity is not needed here. The cost parameter C had a clear and consistent effect across all kernels: higher C values generally improved accuracy for Linear and Polynomial, while for RBF the sweet spot was C=1 with accuracy dropping at C=10, suggesting mild overfitting at higher cost.
   </p>
+
+  <!-- ENSEMBLE -->
+<section id="ensemble">
+  <h2>Ensemble Learning</h2>
+
+  <!-- OVERVIEW -->
+  <h3>(a) Overview — What is Ensemble Learning?</h3>
+
+  <p>
+    Ensemble learning is a machine learning technique that combines the predictions of multiple individual models to produce a single, more accurate and reliable result. The core idea is simple: instead of trusting one model to make every decision, you ask many models to vote or contribute, and the combined answer tends to be better than any single model could achieve on its own. Think of it like asking a panel of experts rather than just one person — the collective wisdom of the group usually outperforms any individual. Ensemble methods are powerful because different models make different kinds of mistakes, and when their predictions are combined, those individual errors tend to cancel each other out, leaving behind a stronger overall prediction.
+  </p>
+
+  <p>
+    There are several popular ensemble techniques. Bagging (Bootstrap Aggregating) trains multiple versions of the same model on different random subsets of the data and averages their predictions — Random Forest is the most well-known example of bagging. Boosting trains models sequentially, where each new model focuses on correcting the errors made by the previous one — XGBoost and AdaBoost are popular examples. Voting combines predictions from completely different types of models by taking a majority vote (for classification) or averaging (for regression). Stacking uses the predictions of multiple base models as inputs to a final meta-model that learns how to best combine them. For this project, we use a <strong>Random Forest</strong> — an ensemble of decision trees trained on random subsets of the data using bagging.
+  </p>
+
+  <figure>
+    <img src="imagesss/ensemble_overview.png" alt="Ensemble Learning Overview">
+    <figcaption>Overview of ensemble learning — combining multiple models to produce stronger predictions.</figcaption>
+  </figure>
+
+  <!-- DATA PREP -->
+  <h3>(b) Data Preparation</h3>
+
+  <p>
+    The same labeled dataset used for SVM and Decision Tree modeling is used here. Each player is described by five numeric batting features: balls faced, total runs, total extras seen, boundary rate, and dot ball rate. The label is a binary class — High Scorer (1) if the player's average runs per ball is above the dataset median, Low Scorer (0) otherwise. Note that average runs per ball was used only to create the label and was deliberately excluded from the features to avoid data leakage. The data was scaled using StandardScaler before being passed to the Random Forest, and the same 80/20 train-test split (random_state=42, stratified) used across all other algorithms was applied here as well to ensure fair and directly comparable results.
+  </p>
+
+  <figure>
+    <img src="imagesss/svm_train_data.png" alt="Training Data">
+    <figcaption>Training set — first 15 rows used to train the Random Forest model (80% of data).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/svm_test_data.png" alt="Testing Data">
+    <figcaption>Testing set — first 15 rows held back to evaluate model accuracy (20% of data).</figcaption>
+  </figure>
+
+  <div class="note">
+    <strong>Dataset used:</strong>
+    <a href="data/svm_dataset.csv" target="_blank">svm_dataset.csv</a>
+  </div>
+
+  <!-- CODE -->
+  <h3>(c) Code</h3>
+  <p>The Python code below implements a Random Forest classifier on the cricket dataset, generates feature importance plots, confusion matrix, and classification report.</p>
+  <div class="note">
+    <strong>Python code for Ensemble Learning:</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/ensemble_cricket.py" target="_blank">ensemble_cricket.py</a>
+  </div>
+
+  <!-- RESULTS -->
+  <h3>(d) Results</h3>
+
+  <p>The Random Forest model was trained with 100 trees (n_estimators=100) using the Gini criterion. The results below show the confusion matrix, classification report, and feature importance chart.</p>
+
+  <figure>
+    <img src="imagesss/ensemble_cm.png" alt="Random Forest Confusion Matrix">
+    <figcaption>Confusion Matrix — Random Forest (100 trees).</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/ensemble_cr.png" alt="Random Forest Classification Report">
+    <figcaption>Classification Report — Random Forest showing precision, recall, and F1-score.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/ensemble_feature_importance.png" alt="Feature Importance">
+    <figcaption>Feature importance chart — showing which batting features drive Random Forest predictions most.</figcaption>
+  </figure>
+
+  <div class="note">
+    <strong>Random Forest Accuracy: 0.9551 (95.51%)</strong> — The Random Forest correctly classified 95.51% of players as either High Scorer or Low Scorer on the unseen test set.
+  </div>
+
+  <p>
+    The Random Forest achieved 95.51% accuracy on the test set — correctly classifying the vast majority of players as either High Scorers or Low Scorers using only 5 batting features, without relying on average runs per ball directly. The model combines 100 individual decision trees, each trained on a random subset of the data and features, and takes a majority vote for the final prediction. This reduces the overfitting that a single deep decision tree suffers from. The feature importance chart reveals which features drive the predictions most — boundary rate and dot ball rate are expected to be the top contributors since they capture how aggressively and efficiently a batsman plays, confirming what was found in the earlier EDA and clustering modules.
+  </p>
+
+  <p>
+    For a non-technical audience, the key takeaway is this: the Random Forest is like asking 100 different cricket analysts to each look at a subset of the data and give their opinion on whether a player is a high or low scorer. The final answer is whichever opinion the majority of those 100 analysts agree on. Because each analyst sees slightly different data, they each make slightly different mistakes — but when you combine all 100 opinions, those individual mistakes tend to cancel out and the group reaches the right answer more often than any single analyst would alone. The result of 95.51% accuracy means the group of 100 trees got it right 95 times out of every 100 players evaluated.
+  </p>
+
+  <!-- CONCLUSIONS -->
+  <h3>(e) Conclusions</h3>
+
+  <p>
+    Ensemble learning through Random Forest provides a powerful and robust approach to classifying cricket batting performance. By combining many decision trees rather than relying on just one, the model achieves 95.51% accuracy and better generalization than any single tree. The feature importance results confirm the findings from earlier in the project — that a small number of well-chosen batting features contain most of the information needed to distinguish player types. This reinforces the broader conclusion of the project: that cricket, despite its apparent complexity, contains clear and measurable patterns that machine learning can reliably detect and classify. The Random Forest is the recommended model for this task — it is accurate, robust, and interpretable through its feature importance scores.
+  </p>
+
+</section>
 
   <!-- (e) CONCLUSIONS -->
   <h3>(e) Conclusions</h3>
