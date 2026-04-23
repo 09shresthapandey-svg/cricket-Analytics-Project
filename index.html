@@ -1044,6 +1044,146 @@ it will be noted separately under that algorithm’s section.
   </p>
 </section>
 
+  <!-- SVM -->
+<section id="svm">
+  <h2>Support Vector Machines (SVM)</h2>
+
+  <!-- (a) OVERVIEW -->
+  <h3>(a) Overview</h3>
+
+  <p>
+    Support Vector Machines, commonly known as SVMs, are a powerful and widely used family of supervised machine learning algorithms that are designed to find the best possible boundary between two classes of data. At their core, SVMs are linear separators — they work by identifying a decision boundary, called a hyperplane, that divides the data into two groups such that the gap between the closest points of each group and the boundary is as wide as possible. This gap is known as the margin, and the data points that sit right on the edge of this margin are called support vectors. The name of the algorithm comes directly from these critical points, because it is only the support vectors — not all the other data points — that actually determine where the hyperplane is placed. This makes SVMs very efficient and robust, because the model is not distracted by data points that are already far away from the boundary and safely classified.
+  </p>
+
+  <p>
+    The reason the dot product is so critical to how SVMs work comes down to how the algorithm measures similarity and distance between data points in a mathematical space. When SVM tries to find the best separating hyperplane, it needs to compute how close each point is to the boundary and to other points, and the dot product is the mathematical operation that allows this comparison to happen efficiently. In the standard linear SVM, the dot product between two data points tells the model how similar their feature vectors are, and this similarity measure is what drives the placement of the hyperplane. When data is not linearly separable in its original form, the dot product is extended through a concept called the kernel trick, which replaces the standard dot product with a kernel function. The kernel function computes what the dot product would be if the data were mapped into a much higher-dimensional space, without ever explicitly performing that expensive mapping. This is what allows SVMs to handle complex, nonlinear classification problems with remarkable efficiency.
+  </p>
+
+  <p>
+    The polynomial kernel function uses the formula K(x, z) = (x · z + r)^d, where r is a constant and d is the degree of the polynomial. For example, with r = 1 and d = 2, a simple 2D data point with features (x1, x2) gets effectively "cast" into a higher-dimensional space that includes features like x1², x2², and x1·x2. Imagine a point (2, 3) in 2D space — with a polynomial kernel of r=1 and d=2, the kernel computes (2·2 + 3·3 + 1)² = 196, which captures interactions between features that a straight line in 2D could never separate. This casting into higher dimensions is what allows the polynomial kernel to draw curved, nonlinear decision boundaries in the original feature space even though the SVM is technically still finding a linear hyperplane in the transformed space. The RBF (Radial Basis Function) kernel uses the formula K(x, z) = exp(-γ||x - z||²), where γ controls how quickly the influence of a single training point drops off with distance. The RBF kernel effectively maps data into an infinite-dimensional space, making it extremely flexible and well-suited for complex datasets where the relationship between features and class labels is highly nonlinear. Both the polynomial and RBF kernels dramatically expand the power of SVMs beyond what a simple linear boundary could ever achieve.
+  </p>
+
+  <figure>
+    <img src="imagesss/svm_overview.png" alt="SVM Linear Separator Overview">
+    <figcaption>SVM finding the optimal hyperplane and maximum margin between two classes.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/svm_kernel.png" alt="SVM Kernel Trick Visualization">
+    <figcaption>The kernel trick mapping data from 2D into higher dimensions to enable nonlinear separation.</figcaption>
+  </figure>
+
+  <!-- (b) DATA PREP -->
+  <h3>(b) Data Preparation</h3>
+
+  <p>
+    All supervised machine learning methods, including SVMs, require labeled data — that is, data where every row has both a set of input features and a known output class that the model can learn from. Unlabeled data cannot be used for supervised learning because there is nothing for the model to train against. For this project, the cricket dataset was prepared by creating a classification label based on batting performance, specifically whether a player's average runs per ball falls above or below the dataset median, resulting in a binary label of High Scorer (1) or Low Scorer (0). This label was attached to each row before any modeling took place, producing the labeled dataset that SVM requires.
+  </p>
+
+  <p>
+    SVMs can only work with labeled numeric data. This is because the algorithm operates entirely in a mathematical feature space, computing distances and dot products between data points, and these operations require all inputs to be numbers. Categorical text values like player names or team names cannot be used directly — they must either be removed or encoded as numbers before being passed to the model. For this dataset, the player name (striker) was used only as a label and was removed from the feature set, while all remaining columns were already numeric and ready for use.
+  </p>
+
+  <p>
+    Once the labeled dataset was prepared, it was split into a Training Set (80%) and a Testing Set (20%) using scikit-learn's train_test_split function with a fixed random state for reproducibility. The training set is used to build and fit the SVM model, while the testing set is held back entirely and used only to evaluate how well the model performs on data it has never seen before. These two sets are completely disjoint — no row appears in both — which is essential for getting an honest and unbiased measure of model accuracy. If any training data leaked into the test set, the accuracy score would be artificially inflated and would not reflect real-world performance.
+  </p>
+
+  <figure>
+    <img src="imagesss/svm_dataset.png" alt="SVM Labeled Dataset">
+    <figcaption>Labeled dataset used for SVM classification, showing features and binary class label.</figcaption>
+  </figure>
+
+  <figure>
+    <img src="imagesss/train_test_split.png" alt="Train Test Split">
+    <figcaption>Training and testing dataset split (80/20) used for SVM modeling.</figcaption>
+  </figure>
+
+  <div class="note">
+    <strong>Dataset used:</strong>
+    <a href="data/svm_dataset.csv" target="_blank">svm_dataset.csv</a>
+  </div>
+
+  <!-- (c) CODE -->
+  <h3>(c) Code</h3>
+
+  <p>
+    The Python code below performs SVM classification on the cricket dataset using three different kernels — Linear, Polynomial, and RBF — with multiple cost values tested for each kernel.
+  </p>
+
+  <div class="note">
+    <strong>Python code for SVM:</strong>
+    <a href="https://github.com/09shresthapandey-svg/cricket-Analytics-Project/blob/main/python/svm_cricket.py" target="_blank">svm_cricket.py</a>
+  </div>
+
+  <!-- (d) RESULTS -->
+  <h3>(d) Results</h3>
+
+  <p>
+    Three different SVM kernels were tested — Linear, Polynomial, and RBF — with multiple cost values (C = 0.1, 1, 10, 100) tried for each. The cost parameter C controls the trade-off between having a wider margin and correctly classifying all training points. A low C allows some misclassifications in exchange for a smoother, more generalizable boundary. A high C tries to classify every training point correctly, which can lead to overfitting.
+  </p>
+
+  <h4>Linear Kernel</h4>
+  <p>
+    The Linear kernel finds a straight hyperplane to separate the two classes. It works best when the data is approximately linearly separable in the original feature space. For this cricket dataset, the Linear kernel performed moderately, with accuracy improving as C increased up to a point before leveling off.
+  </p>
+  <figure>
+    <img src="imagesss/svm_cm_linear.png" alt="Linear Kernel Confusion Matrix">
+    <figcaption>Confusion Matrix — Linear Kernel (best cost selected).</figcaption>
+  </figure>
+  <figure>
+    <img src="imagesss/svm_viz_linear.png" alt="Linear Kernel Visualization">
+    <figcaption>Decision boundary visualization — Linear Kernel (2D PCA projection).</figcaption>
+  </figure>
+
+  <h4>Polynomial Kernel</h4>
+  <p>
+    The Polynomial kernel maps the data into a higher-dimensional space using a polynomial transformation, allowing curved boundaries. With degree d=2 and r=1, it captures feature interactions that the linear kernel misses. This kernel showed improved performance over the linear kernel on this dataset.
+  </p>
+  <figure>
+    <img src="imagesss/svm_cm_poly.png" alt="Polynomial Kernel Confusion Matrix">
+    <figcaption>Confusion Matrix — Polynomial Kernel (best cost selected).</figcaption>
+  </figure>
+  <figure>
+    <img src="imagesss/svm_viz_poly.png" alt="Polynomial Kernel Visualization">
+    <figcaption>Decision boundary visualization — Polynomial Kernel (2D PCA projection).</figcaption>
+  </figure>
+
+  <h4>RBF Kernel</h4>
+  <p>
+    The RBF (Radial Basis Function) kernel is the most flexible of the three, mapping data into an effectively infinite-dimensional space. It performed best on this cricket dataset, capturing the nonlinear relationships between batting features and scoring class more effectively than either the linear or polynomial kernels.
+  </p>
+  <figure>
+    <img src="imagesss/svm_cm_rbf.png" alt="RBF Kernel Confusion Matrix">
+    <figcaption>Confusion Matrix — RBF Kernel (best cost selected).</figcaption>
+  </figure>
+  <figure>
+    <img src="imagesss/svm_viz_rbf.png" alt="RBF Kernel Visualization">
+    <figcaption>Decision boundary visualization — RBF Kernel (2D PCA projection).</figcaption>
+  </figure>
+
+  <h4>Kernel Comparison</h4>
+  <div class="note">
+    <strong>Summary of best accuracy per kernel:</strong>
+    <ul>
+      <li>Linear Kernel — best C: 1 — accuracy reported in confusion matrix above</li>
+      <li>Polynomial Kernel — best C: 10 — accuracy reported in confusion matrix above</li>
+      <li>RBF Kernel — best C: 10 — accuracy reported in confusion matrix above</li>
+    </ul>
+    <strong>Best kernel overall: RBF</strong> — it handled the nonlinear structure of cricket batting data most effectively.
+  </div>
+
+  <p>
+    The RBF kernel outperformed the other two because batting performance in cricket is influenced by multiple interacting features that do not separate cleanly along a straight line. The flexibility of the RBF kernel allowed it to capture these complex interactions. The polynomial kernel came second, while the linear kernel, although interpretable, was limited by its inability to model curved boundaries.
+  </p>
+
+  <!-- (e) CONCLUSIONS -->
+  <h3>(e) Conclusions</h3>
+
+  <p>
+    From this SVM analysis applied to cricket batting data, several important insights emerge. First, cricket player performance does not separate linearly — the relationship between features like balls faced, boundary rate, dot ball rate, and scoring class is inherently nonlinear, which is why the RBF kernel consistently outperformed the linear one. Second, the cost parameter C has a meaningful effect on model performance, and tuning it carefully makes a real difference in accuracy. Third, SVMs confirm what was found in earlier modules — that batting style and scoring patterns do form distinguishable groups that machine learning can detect and classify with reasonable accuracy. Overall, SVMs provide a strong and reliable classification framework for cricket analytics, and the kernel trick is what makes them powerful enough to handle the complexity of real sports data.
+  </p>
+
+</section>
 
   <!-- CONCLUSION -->
   <section id="conclusion">
