@@ -1291,7 +1291,13 @@ it will be noted separately under that algorithm’s section.
   <p>
     The same labeled dataset used for SVM and Decision Tree modeling is used here. Each player is described by five numeric batting features: balls faced, total runs, total extras seen, boundary rate, and dot ball rate. The label is a binary class — High Scorer (1) if the player's average runs per ball is above the dataset median, Low Scorer (0) otherwise. Note that average runs per ball was used only to create the label and was deliberately excluded from the features to avoid data leakage. The data was scaled using StandardScaler before being passed to the Random Forest, and the same 80/20 train-test split (random_state=42, stratified) used across all other algorithms was applied here as well to ensure fair and directly comparable results.
   </p>
+<h4>Data Before Transformation</h4>
+  <figure>
+    <img src="imagesss/cluster_labeled_data.png" alt="Data Before Transformation">
+    <figcaption>Labeled dataset before scaling — raw feature values used as input to the Random Forest.</figcaption>
+  </figure>
 
+  <h4>Data After Transformation (StandardScaler)</h4>
   <figure>
     <img src="imagesss/ensemble_train_data.png" alt="Training Data">
     <figcaption>Training set — first 15 rows used to train the Random Forest model (80% of data).</figcaption>
